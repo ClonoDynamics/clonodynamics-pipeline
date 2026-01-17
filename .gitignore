@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# Data (never commit real data)
+data/
+**/data/
+*.fastq
+*.fq
+*.bam
+*.sam
+*.h5
+*.hdf5
+
+# Outputs
+results/
+**/results/
+logs/
+**/logs/
+*.png
+*.pdf
+
+# Secrets
+.env
+*.key
+*.pem
+
+# Sandbox temp
+sandbox/temp_outputs/
