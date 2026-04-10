@@ -1,0 +1,49 @@
+FP sensitivity diagnostics report | model=hinge_plateau_smooth
+===============================================
+
+Input manifest_csv: ./results/10-fp_alpha_diagnostics/manifest_TT_vs_ALL.csv
+Input input_root: None
+Output dir: ./figures/10-fp_alpha_diagnostics/prova
+Format: pdf
+
+Global settings
+  x_min = None
+  x_max = None
+  x_mode = common
+  base xlim = (-13.146295375085534, -6.52692152986854)
+  x_plot_min = None
+  x_plot_max = None
+  final plot xlim = (-13.146295375085534, -6.52692152986854)
+  obs_order = 
+  alpha_order = 
+  model_order = 
+  facet_mode = obs_then_alpha
+  ratio_smooth_sigma_pts = 1.0
+  flux_smooth_sigma_pts = 1.5
+  drift_smooth_sigma_pts = 0.0
+  diffusion_smooth_sigma_pts = 0.0
+  only_multipanel = False
+  only_fp_multipanel = False
+  only_bd_multipanel = False
+  bd_overlay = False
+  bd_overlay_by = condition
+  bd_overlay_legend_outside = False
+
+Resolved common y-limits
+  pdf       = (-0.03426809091765869, 0.8217299701769658)
+  ratio     = (-5.0, 18.0)
+  flux      = (-1.5, 1.5)
+  source    = (-25.0, 25.0)
+  drift     = (-0.5425218525019186, 0.9849507908638455)
+  diffusion = (0.0441976054713311, 0.740215328921696)
+
+Datasets
+  obs_class=ALL_unweighted  alpha=0.02  tag=fp  n_grid=500  JS=0.0383808  KS=0.199715
+    grid:    /Users/palmieri/Documents/tcr-dynamics_vs6/results/8-fp_stationary/ALL_p02_unweighted/fp.grid.csv
+    summary: /Users/palmieri/Documents/tcr-dynamics_vs6/results/8-fp_stationary/ALL_p02_unweighted/fp.summary.json
+  obs_class=TT_unweighted  alpha=0.02  tag=fp  n_grid=500  JS=0.0401658  KS=0.198239
+    grid:    /Users/palmieri/Documents/tcr-dynamics_vs6/results/8-fp_stationary/TT_p02_unweighted/fp.grid.csv
+    summary: /Users/palmieri/Documents/tcr-dynamics_vs6/results/8-fp_stationary/TT_p02_unweighted/fp.summary.json
+  obs_class=TT_w_clone  alpha=0.02  tag=fp  n_grid=500  JS=0.0223049  KS=0.138154
+    grid:    /Users/palmieri/Documents/tcr-dynamics_vs6/results/8-fp_stationary/TT_p02_w_clone/fp.grid.csv
+    summary: /Users/palmieri/Documents/tcr-dynamics_vs6/results/8-fp_stationary/TT_p02_w_clone/fp.summary.json
