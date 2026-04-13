@@ -1,6 +1,0 @@
-condition,transitions,drift,flux, diffusion
-ALL_p02,./results/4-transitions/p_02/transitions_all.csv,./results/7-fit_drift_models/ALL_p02_w_clone/drift_function_grid.csv,./results/8-fp_stationary/ALL_p02_w_clone/fp.grid.csv,./results/8-fp_stationary/ALL_p02_w_clone/fp.grid.csv
-TT_p05,./results/4-transitions/p_05/transitions_all.csv,./results/7-fit_drift_models/TT_p05_w_clone/drift_function_grid.csv,./results/8-fp_stationary/TT_p05_w_clone/fp.grid.csv,./results/8-fp_stationary/TT_p05_w_clone/fp.grid.csv
-TT_p02,./results/4-transitions/p_02/transitions_all.csv,./results/7-fit_drift_models/TT_p02_w_clone/drift_function_grid.csv,./results/8-fp_stationary/TT_p02_w_clone/fp.grid.csv,./results/8-fp_stationary/TT_p02_w_clone/fp.grid.csv
-TT_p01,./results/4-transitions/p_01/transitions_all.csv,./results/7-fit_drift_models/TT_p01_w_clone/drift_function_grid.csv,./results/8-fp_stationary/TT_p01_w_clone/fp.grid.csv,./results/8-fp_stationary/TT_p01_w_clone/fp.grid.csv
-TT_p005,./results/4-transitions/p_005/transitions_all.csv,./results/7-fit_drift_models/TT_p005_w_clone/drift_function_grid.csv,./results/8-fp_stationary/TT_p005_w_clone/fp.grid.csv,./results/8-fp_stationary/TT_p005_w_clone/fp.grid.csv

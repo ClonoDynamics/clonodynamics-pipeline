@@ -1,4 +1,0 @@
-obs_class,alpha,grid_csv,summary_json
-ALL_unweighted,0.02,./results/8-fp_stationary/ALL_p02_unweighted/fp.grid.csv,./results/8-fp_stationary/ALL_p02_unweighted/fp.summary.json
-TT_unweighted,0.02,./results/8-fp_stationary/TT_p02_unweighted/fp.grid.csv,./results/8-fp_stationary/TT_p02_unweighted/fp.summary.json
-TT_w_clone,0.02,./results/8-fp_stationary/TT_p02_w_clone/fp.grid.csv,./results/8-fp_stationary/TT_p02_w_clone/fp.summary.json

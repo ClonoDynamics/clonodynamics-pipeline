@@ -1,2 +1,0 @@
-model,intercept_a,slope_b,r2_log10,n_points
-log10(freq_cell) = a + b * log10(freq_mol),1.071762674058281,1.16779166832333,0.829263660540619,5

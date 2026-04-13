@@ -1,6 +1,0 @@
-subject,time,pair_id,mean_median_delta_loglik,mean_frac_thresholds_pl_better,min_frac_thresholds_pl_better,n_replicates
-1,1,1_1,0.5500116253109313,1.0,1.0,2
-1,2,1_2,0.56606705554501,1.0,1.0,2
-1,3,1_3,0.5628369768065311,1.0,1.0,2
-1,4,1_4,0.5510177860022847,1.0,1.0,2
-1,5,1_5,0.5216176975412543,1.0,1.0,2
