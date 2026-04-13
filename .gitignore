@@ -1,4 +1,6 @@
+# =========================
 # Python
+# =========================
 __pycache__/
 *.pyc
 *.pyo
@@ -6,12 +8,16 @@ __pycache__/
 venv/
 .ipynb_checkpoints/
 
+# =========================
 # OS / editors
+# =========================
 .DS_Store
 .vscode/
 .idea/
 
-# Data (never commit real data)
+# =========================
+# Data (never commit raw data)
+# =========================
 data/
 **/data/
 *.fastq
@@ -21,23 +27,51 @@ data/
 *.h5
 *.hdf5
 
-# Outputs
+# =========================
+# Outputs (default: ignore all)
+# =========================
 results/*
 **/results/*
 
-# Re-include CSV results (for reproducibility)
-!results/*.csv
-!**/results/*.csv
+# =========================
+# EXCLUDE LARGE GENERATED FILES (CRITICAL)
+# =========================
+results/**/per_clone_denoised_subject.csv
+results/**/trajectory_observability_subject.csv
+results/**/trajectory_observability_counts_subject.csv
+results/**/trajectories_long.csv
+results/**/transitions_all.csv
+results/**/fitted_values.csv
+results/**/diffusion_residuals_long.csv
+results/**/null_per_clone_logP*.csv
 
+# =========================
+# RE-INCLUDE ONLY FINAL / LIGHT CSV
+# =========================
+!results/
+!results/**/*.csv
+
+# Optional: keep only specific folders clean
+# (uncomment if you want stricter control)
+# !results/final/
+# !results/final/**/*.csv
+
+# =========================
+# Logs and figures
+# =========================
 logs/
 **/logs/
 *.png
 *.pdf
 
+# =========================
 # Secrets
+# =========================
 .env
 *.key
 *.pem
 
+# =========================
 # Sandbox temp
+# =========================
 sandbox/temp_outputs/
