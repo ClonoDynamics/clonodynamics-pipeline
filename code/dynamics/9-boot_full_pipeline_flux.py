@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-09_bootstrap_full_pipeline_flux.py
+bootstrap_full_pipeline_flux.py
 
 Full-pipeline bootstrap for Fokker–Planck flux/source diagnostics.
 

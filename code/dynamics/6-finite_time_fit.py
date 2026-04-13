@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-6-finite_time_fit.py
+finite_time_fit.py
 
 OU finite-time validation (ANALYSIS ONLY):
 - Read finite_time_summary.csv (from finite_time_drift_diffusion.py)
@@ -17,7 +17,7 @@ OU finite-time validation (ANALYSIS ONLY):
 NO PLOTTING here. Use 4b_plot_ou_finite_time_validation.py.
 
 Example:
-python ./code/dynamics/4a_ou_finite_time_fit.py \
+python ./code/dynamics/finite_time_fit.py \
   --summary_csv ./results/finite_time_moments_TT_consecutive/finite_time_summary.csv \
   --out_dir ./results/finite_time/ou_validation \
   --dt_ref 1 \

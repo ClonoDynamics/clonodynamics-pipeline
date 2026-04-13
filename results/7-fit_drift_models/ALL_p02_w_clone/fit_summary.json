@@ -1,0 +1,176 @@
+{
+  "meta": {
+    "input_csv": "/Users/palmieri/Documents/tcr-dynamics_vs6/results/4-transitions/p_02/transitions_all.csv",
+    "data_dir": "/Users/palmieri/Documents/tcr-dynamics_vs6/results/7-fit_drift_models/ALL_p02_w_clone",
+    "filters": {
+      "dt": 1,
+      "obs_class": "ALL"
+    },
+    "weight": {
+      "col": "w_clone",
+      "cap_q": 0.999
+    },
+    "models": [
+      "OU_linear",
+      "tanh_saturating",
+      "rational_saturating",
+      "hinge_plateau_smooth"
+    ],
+    "n": 644754,
+    "grid": {
+      "n": 500,
+      "qlo": 0.02,
+      "qhi": 0.98
+    },
+    "plot_binning": {
+      "nbins_plot": 20,
+      "min_per_bin": 200
+    },
+    "diffusion_binning": {
+      "nbins_diff": 20,
+      "min_per_bin_diff": 200
+    },
+    "bootstrap": {
+      "requested": 500,
+      "kept": 500,
+      "skipped": 0,
+      "ci": 0.95,
+      "seed": 123,
+      "cluster_cols": "subject,aaSeqCDR3"
+    },
+    "info_criteria_note": "AIC/BIC computed from SSE under a Gaussian residual approximation; used for relative comparison across drift models.",
+    "diffusion_note": "diffusion_residuals_long.csv contains per-transition residuals. diffusion_binned.csv contains unsmoothed bin-wise conditional residual summaries and derived diffusion-scale proxies (D_var_mad, D_mean_resid2, D_mad2). Final D(x) for FP must be selected, interpolated, smoothed, and floored downstream."
+  },
+  "fit_summary": [
+    {
+      "model": "hinge_plateau_smooth",
+      "n": 644754,
+      "k": 5,
+      "sse": 345761.19919662585,
+      "aic": -401749.42689603934,
+      "bic": -401692.54377540096,
+      "a": -8.416426455002167,
+      "b": -0.7205410116925482,
+      "x_star": NaN,
+      "tau": NaN,
+      "weight_cap_q": 0.999,
+      "A": 0.616859167638275,
+      "Delta": 0.42967822681569723,
+      "slope_local": NaN,
+      "tau_local": NaN,
+      "nfev": 9.0,
+      "status": 2.0,
+      "x_c": -11.349820442731614,
+      "tau_from_b": 1.3878460542461055
+    },
+    {
+      "model": "tanh_saturating",
+      "n": 644754,
+      "k": 3,
+      "sse": 351313.30848832754,
+      "aic": -391482.44341758743,
+      "bic": -391448.3135452044,
+      "a": NaN,
+      "b": NaN,
+      "x_star": -11.871568203927549,
+      "tau": NaN,
+      "weight_cap_q": 0.999,
+      "A": 0.8234977537542633,
+      "Delta": 0.8657867751262442,
+      "slope_local": -0.9511553853824868,
+      "tau_local": 1.051352928625717,
+      "nfev": 8.0,
+      "status": 2.0,
+      "x_c": NaN,
+      "tau_from_b": NaN
+    },
+    {
+      "model": "rational_saturating",
+      "n": 644754,
+      "k": 3,
+      "sse": 351523.58264580875,
+      "aic": -391096.6494733939,
+      "bic": -391062.5196010109,
+      "a": NaN,
+      "b": NaN,
+      "x_star": -11.870642528210848,
+      "tau": NaN,
+      "weight_cap_q": 0.999,
+      "A": 0.8994897840245412,
+      "Delta": 0.9118609170284104,
+      "slope_local": -0.9864330921823203,
+      "tau_local": 1.013753500288261,
+      "nfev": 8.0,
+      "status": 2.0,
+      "x_c": NaN,
+      "tau_from_b": NaN
+    },
+    {
+      "model": "OU_linear",
+      "n": 644754,
+      "k": 2,
+      "sse": 369358.23654199834,
+      "aic": -359189.6428879285,
+      "bic": -359166.8896396732,
+      "a": -6.700471100801858,
+      "b": -0.5685617894201639,
+      "x_star": -11.784947960775197,
+      "tau": 1.7588237876833572,
+      "weight_cap_q": 0.999,
+      "A": NaN,
+      "Delta": NaN,
+      "slope_local": NaN,
+      "tau_local": NaN,
+      "nfev": NaN,
+      "status": NaN,
+      "x_c": NaN,
+      "tau_from_b": NaN
+    }
+  ],
+  "model_compare": [
+    {
+      "dt": 1,
+      "obs_class": "ALL",
+      "weight_col": "w_clone",
+      "weight_cap_q": 0.999,
+      "n": 644754,
+      "baseline": "OU_linear",
+      "model": "hinge_plateau_smooth",
+      "delta_aic": -42559.784008110815,
+      "delta_bic": -42525.65413572779
+    },
+    {
+      "dt": 1,
+      "obs_class": "ALL",
+      "weight_col": "w_clone",
+      "weight_cap_q": 0.999,
+      "n": 644754,
+      "baseline": "OU_linear",
+      "model": "tanh_saturating",
+      "delta_aic": -32292.80052965891,
+      "delta_bic": -32281.423905531236
+    },
+    {
+      "dt": 1,
+      "obs_class": "ALL",
+      "weight_col": "w_clone",
+      "weight_cap_q": 0.999,
+      "n": 644754,
+      "baseline": "OU_linear",
+      "model": "rational_saturating",
+      "delta_aic": -31907.006585465395,
+      "delta_bic": -31895.62996133772
+    },
+    {
+      "dt": 1,
+      "obs_class": "ALL",
+      "weight_col": "w_clone",
+      "weight_cap_q": 0.999,
+      "n": 644754,
+      "baseline": "OU_linear",
+      "model": "OU_linear",
+      "delta_aic": 0.0,
+      "delta_bic": 0.0
+    }
+  ]
+}

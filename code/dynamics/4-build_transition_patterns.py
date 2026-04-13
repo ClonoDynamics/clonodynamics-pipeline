@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-4-build_transition_patterns.py
+build_transition_patterns.py
 
 Construct transition patterns from long-format clonotype trajectories.
 
@@ -70,13 +70,13 @@ Each transitions CSV includes:
 EXAMPLE
 ----------------------------------------------------------------------
 Default (build ONLY all-pairs transitions):
-python 3-build_transition_patterns.py \
+python build_transition_patterns.py \
   --input trajectories_long.csv \
   --outdir results/transitions_patterns \
   --max_dt 6
 
 Build all-pairs + adjacent/consecutive-observed transitions:
-python 3-build_transition_patterns.py \
+python build_transition_patterns.py \
   --input trajectories_long.csv \
   --outdir results/transitions_patterns \
   --max_dt 6 \

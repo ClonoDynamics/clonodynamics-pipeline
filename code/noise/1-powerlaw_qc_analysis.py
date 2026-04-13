@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-stepA_powerlaw_qc_analysis.py
+powerlaw_qc_analysis.py
 
 STEP A — Analysis-only script for:
 (A1) empirical heavy-tail validation and tail-model comparison

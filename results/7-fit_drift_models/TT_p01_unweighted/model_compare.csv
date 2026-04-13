@@ -1,0 +1,5 @@
+dt,obs_class,weight_col,weight_cap_q,n,baseline,model,delta_aic,delta_bic
+1,TT,unweighted,,22538,OU_linear,hinge_plateau_smooth,-1287.036223857318,-1262.967349699782
+1,TT,unweighted,,22538,OU_linear,tanh_saturating,-583.2178798641944,-575.1949218116824
+1,TT,unweighted,,22538,OU_linear,rational_saturating,-566.6736825460066,-558.6507244934946
+1,TT,unweighted,,22538,OU_linear,OU_linear,0.0,0.0

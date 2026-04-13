@@ -62,7 +62,7 @@ For weighted transitions:
 --out_dir ./results/5-finite_time_diagnostics/TT_w   
 
 For unweighted tranistions:
-    python ./code/dynamics/5-finite_time_diagnostics.py \
+    python ./code/dynamics/finite_time_diagnostics.py \
     --mode all \
     --x_base ln \
     --n_boot 300 \

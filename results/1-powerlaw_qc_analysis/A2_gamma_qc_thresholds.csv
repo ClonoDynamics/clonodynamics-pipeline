@@ -1,0 +1,2 @@
+gamma_mad_cutoff,pass_fail_rule
+3.5,FAIL if one replicate fit failed or |z_delta_gamma| > gamma_mad_cutoff; PASS otherwise

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-8-fp_diagnostics_build_obsclass_all.py
+fp_diagnostics_build.py
 ROBUST v3.1 - build closed-vs-open FP diagnostic grids in log-frequency space
 
 Key update versus v3.0

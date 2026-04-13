@@ -1,0 +1,2 @@
+model,intercept_a,slope_b,r2_log10,n_points
+log10(freq_cell) = a + b * log10(freq_mol),0.2970483729438322,0.8588226878741386,0.9957334824034644,3

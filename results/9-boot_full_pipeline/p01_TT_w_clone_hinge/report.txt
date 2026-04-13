@@ -1,0 +1,26 @@
+FULL-PIPELINE BOOTSTRAP REPORT
+================================
+
+model: hinge_plateau_smooth
+dt: 1.0
+obs_class: TT
+bootstrap_reps: 500
+cluster_cols: ['subject', 'aaSeqCDR3']
+diffusion_source_requested: recompute_from_transitions
+diffusion_source_effective: recompute_from_transitions
+observable_col: observable
+observable_mode: filter
+observable_threshold: 0.5
+bulk_gridpoints: 750/800
+bulk_x_range: [-10.4728, -5.40873]
+int_signed_J_CI_includes_0: False
+
+GLOBAL METRICS
+------------------------------
+int_abs_J: 0.255862  0.219204  0.303944
+int_sq_J: 0.0371768  0.0259151  0.0548831
+int_signed_J: 0.101836  0.0917818  0.110366
+mean_signed_J: 0.0201096  0.0181241  0.0217939
+int_abs_S: 6.66069  5.48269  8.14393
+int_sq_S: 24.4858  14.6157  41.6779
+p_emp_int: 1  1  1

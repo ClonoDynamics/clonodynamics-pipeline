@@ -1,0 +1,18 @@
+{
+  "input": "/Users/palmieri/Documents/tcr-dynamics_vs6/results/5-finite_time_diagnostics/TT_dt1-5/unweighted/finite_time_summary.csv",
+  "dt_ref": 1,
+  "slope_ref": -0.3090143436458187,
+  "lambda_hat": 0.3090143436458187,
+  "var_ref": 0.2741870692839515,
+  "D_hat": 0.18379355537455674,
+  "used_mc_bands": true,
+  "mc_reps_requested": 20000,
+  "mc_seed": 123,
+  "pred_ci": 0.95,
+  "min_mc_ok": 200,
+  "notes": [
+    "lambda_hat \u2248 -slope(dt_ref) (requires slope<0).",
+    "D_hat is solved from Var_OU(dt_ref) = var_mad_pooled(dt_ref).",
+    "Prediction bands (if enabled) use uniform sampling within CI bounds at dt_ref."
+  ]
+}

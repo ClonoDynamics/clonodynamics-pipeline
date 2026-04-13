@@ -1,0 +1,5 @@
+alpha,grid_csv,summary_json
+0.005,./results/8-fp_stationary/p_005_dt1_TT_w/fp_dt1__TT__hinge_plateau_smooth__trajObs=1.grid.csv,./results/8-fp_stationary/p_005_dt1_TT_w/fp_dt1__TT__hinge_plateau_smooth__trajObs=1.summary.json
+0.02,./results/8-fp_stationary/p_02_dt1_TT_w/fp_dt1__TT__hinge_plateau_smooth__trajObs=1.grid.csv,./results/8-fp_stationary/p_02_dt1_TT_w/fp_dt1__TT__hinge_plateau_smooth__trajObs=1.summary.json
+0.01,./results/8-fp_stationary/p_01_dt1_TT_w/fp_dt1__TT__hinge_plateau_smooth__trajObs=1.grid.csv,./results/8-fp_stationary/p_01_dt1_TT_w/fp_dt1__TT__hinge_plateau_smooth__trajObs=1.summary.json
+0.05,./results/8-fp_stationary/p_05_dt1_TT_w/fp_dt1__TT__hinge_plateau_smooth__trajObs=1.grid.csv,./results/8-fp_stationary/p_05_dt1_TT_w/fp_dt1__TT__hinge_plateau_smooth__trajObs=1.summary.json

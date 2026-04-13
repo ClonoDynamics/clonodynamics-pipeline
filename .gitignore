@@ -22,8 +22,13 @@ data/
 *.hdf5
 
 # Outputs
-results/
-**/results/
+results/*
+**/results/*
+
+# Re-include CSV results (for reproducibility)
+!results/*.csv
+!**/results/*.csv
+
 logs/
 **/logs/
 *.png

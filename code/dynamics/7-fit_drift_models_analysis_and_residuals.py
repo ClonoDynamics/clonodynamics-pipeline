@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-7-fit_drift_models_analysis_and_residuals.py
+fit_drift_models_analysis_and_residuals.py
 ROBUST v3.0 - multi-model drift fitting + residual-based diffusion summaries
 
 PURPOSE
@@ -137,7 +137,7 @@ Optional / commonly used columns:
 
 EXAMPLE
 -------
-python ./code/dynamics/7-fit_drift_models_analysis_and_residuals.py \
+python ./code/dynamics/fit_drift_models_analysis_and_residuals.py \
   --csv ./results/3-transitions/p_01/transitions_all.csv \
   --data_dir ./results/5-drift-multimodel/p_01_dt1_TT_w/data \
   --dt 1 \

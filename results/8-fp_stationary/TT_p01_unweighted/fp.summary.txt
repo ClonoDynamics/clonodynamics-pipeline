@@ -1,0 +1,22 @@
+tag=fp
+drift_grid=./results/7-fit_drift_models/TT_p01_unweighted/drift_function_grid.csv
+diffusion_binned=./results/7-fit_drift_models/TT_p01_unweighted/diffusion_binned.csv
+trajectories=./results/3-trajectories/p_01/trajectories_long.csv
+dt=1.0
+obs_class=TT
+model=hinge_plateau_smooth
+weight_col=None
+weight_cap_q=None
+diffusion_source=D_mean_resid2
+D_var_source=D_mean_resid2
+smooth_D_sigma_pts=2.0
+D_floor=0.0001
+traj_observable_only=True
+traj_observable_col=observable
+x_col_traj=
+smooth_p_sigma_pts=2.0
+smooth_J_sigma_pts=3.0
+JS=0.037569127351642105
+KS=0.19259998026038241
+grid_csv=results/8-fp_stationary/TT_p01_unweighted/fp.grid.csv
+notes={"drift_note": "b(x) is read directly from drift_function_grid.csv for the selected model.", "diffusion_note": "D_raw_interp is the selected empirical diffusion proxy interpolated onto xgrid; D_smooth is after Gaussian smoothing; D_final is after applying D_floor. All FP diagnostics use D_final.", "empirical_density_note": "p_emp is built from trajectories_long.csv and may be restricted to observable==True if --traj_observable_only is used.", "diagnostic_note": "J and S are empirical diagnostics relative to p_emp and the inferred b(x), D(x); they quantify departures from the closed stationary density."}

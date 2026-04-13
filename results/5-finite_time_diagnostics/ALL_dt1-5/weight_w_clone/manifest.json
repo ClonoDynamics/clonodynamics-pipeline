@@ -1,0 +1,66 @@
+{
+  "input": "/Users/palmieri/Documents/tcr-dynamics_vs6/results/4-transitions/p_02/transitions_all.csv",
+  "out_dir": "/Users/palmieri/Documents/tcr-dynamics_vs6/results/5-finite_time_diagnostics/ALL_dt1-5/weight_w_clone_4",
+  "mode": "all",
+  "x_base_in": "ln",
+  "output_base": "ln",
+  "filters": {
+    "min_dt": 0.0,
+    "dt_max": 5,
+    "dt_values": [],
+    "only_TT": false,
+    "tt_value": "TT",
+    "classes": [
+      "TT",
+      "FT",
+      "TF",
+      "FF"
+    ],
+    "subsample_per_dt": 0
+  },
+  "weights": {
+    "weight_col": "w_clone"
+  },
+  "binning": {
+    "binning_mode": "per_dataset_quantile",
+    "x_var": "ln_f0",
+    "f_var": "ln_fgeo",
+    "nbins_x": 20,
+    "nbins_f": 6,
+    "min_rows_per_bin": 200,
+    "x_edges_saved": "xbin_edges.csv",
+    "f_edges_saved": "fbin_edges.csv",
+    "x_edges_csv_in": "",
+    "f_edges_csv_in": ""
+  },
+  "local_bootstrap": {
+    "n_boot": 300,
+    "seed": 123
+  },
+  "finite_time": {
+    "window_bins": 5,
+    "crossing_mode": "first",
+    "mad_to_sigma": 1.4826,
+    "robust_center_mode": "weighted_median_if_possible",
+    "bootstrap_reps_ft": 300,
+    "bootstrap_ci": 0.95,
+    "cluster_cols": [
+      "subject",
+      "aaSeqCDR3"
+    ],
+    "use_wls_slope": true
+  },
+  "n_rows_used": 1926927,
+  "outputs": [
+    "dt_freqbin_counts.csv",
+    "drift_by_dt_xbins.csv",
+    "msd_by_dt.csv",
+    "msd_by_dt_xbins.csv",
+    "msd_by_dt_freqbins.csv",
+    "finite_time_summary.csv",
+    "finite_time_by_dt_xbins_boot.csv",
+    "xbin_edges.csv",
+    "fbin_edges.csv",
+    "manifest.json"
+  ]
+}

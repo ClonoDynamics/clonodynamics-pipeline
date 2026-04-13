@@ -1,0 +1,176 @@
+{
+  "meta": {
+    "input_csv": "/Users/palmieri/Documents/tcr-dynamics_vs6/results/4-transitions/p_005/transitions_all.csv",
+    "data_dir": "/Users/palmieri/Documents/tcr-dynamics_vs6/results/7-fit_drift_models/TT_p005_unweighted",
+    "filters": {
+      "dt": 1,
+      "obs_class": "TT"
+    },
+    "weight": {
+      "col": "",
+      "cap_q": null
+    },
+    "models": [
+      "OU_linear",
+      "tanh_saturating",
+      "rational_saturating",
+      "hinge_plateau_smooth"
+    ],
+    "n": 12207,
+    "grid": {
+      "n": 500,
+      "qlo": 0.02,
+      "qhi": 0.98
+    },
+    "plot_binning": {
+      "nbins_plot": 20,
+      "min_per_bin": 200
+    },
+    "diffusion_binning": {
+      "nbins_diff": 20,
+      "min_per_bin_diff": 200
+    },
+    "bootstrap": {
+      "requested": 500,
+      "kept": 500,
+      "skipped": 0,
+      "ci": 0.95,
+      "seed": 123,
+      "cluster_cols": "subject,aaSeqCDR3"
+    },
+    "info_criteria_note": "AIC/BIC computed from SSE under a Gaussian residual approximation; used for relative comparison across drift models.",
+    "diffusion_note": "diffusion_residuals_long.csv contains per-transition residuals. diffusion_binned.csv contains unsmoothed bin-wise conditional residual summaries and derived diffusion-scale proxies (D_var_mad, D_mean_resid2, D_mad2). Final D(x) for FP must be selected, interpolated, smoothed, and floored downstream."
+  },
+  "fit_summary": [
+    {
+      "model": "hinge_plateau_smooth",
+      "n": 12207,
+      "k": 5,
+      "sse": 2447.4789912615265,
+      "aic": -19606.05141920807,
+      "bic": -19569.00259502472,
+      "a": -84.85281030617803,
+      "b": -9.74108113243418,
+      "x_star": NaN,
+      "tau": NaN,
+      "weight_cap_q": NaN,
+      "A": 0.02173469847096161,
+      "Delta": 1.7369448327103356,
+      "slope_local": NaN,
+      "tau_local": NaN,
+      "nfev": 46.0,
+      "status": 2.0,
+      "x_c": -15.635594188070536,
+      "tau_from_b": 0.10265800955813535
+    },
+    {
+      "model": "tanh_saturating",
+      "n": 12207,
+      "k": 3,
+      "sse": 2532.558469165407,
+      "aic": -19192.91951867218,
+      "bic": -19170.690224162172,
+      "a": NaN,
+      "b": NaN,
+      "x_star": -8.669062768138987,
+      "tau": NaN,
+      "weight_cap_q": NaN,
+      "A": 0.2242277505252427,
+      "Delta": 0.8659465178412306,
+      "slope_local": -0.2589394909563622,
+      "tau_local": 3.8619061013313143,
+      "nfev": 15.0,
+      "status": 2.0,
+      "x_c": NaN,
+      "tau_from_b": NaN
+    },
+    {
+      "model": "rational_saturating",
+      "n": 12207,
+      "k": 3,
+      "sse": 2535.307851027121,
+      "aic": -19179.674612213283,
+      "bic": -19157.445317703274,
+      "a": NaN,
+      "b": NaN,
+      "x_star": -8.671023426486578,
+      "tau": NaN,
+      "weight_cap_q": NaN,
+      "A": 0.23942229107502705,
+      "Delta": 0.8812319547177517,
+      "slope_local": -0.2716904326871705,
+      "tau_local": 3.680659602583131,
+      "nfev": 14.0,
+      "status": 2.0,
+      "x_c": NaN,
+      "tau_from_b": NaN
+    },
+    {
+      "model": "OU_linear",
+      "n": 12207,
+      "k": 2,
+      "sse": 2580.2664231985145,
+      "aic": -18967.104989510397,
+      "bic": -18952.285459837058,
+      "a": -1.0241047872597053,
+      "b": -0.12328912121511271,
+      "x_star": -8.306530026058546,
+      "tau": 8.111015717722713,
+      "weight_cap_q": NaN,
+      "A": NaN,
+      "Delta": NaN,
+      "slope_local": NaN,
+      "tau_local": NaN,
+      "nfev": NaN,
+      "status": NaN,
+      "x_c": NaN,
+      "tau_from_b": NaN
+    }
+  ],
+  "model_compare": [
+    {
+      "dt": 1,
+      "obs_class": "TT",
+      "weight_col": "unweighted",
+      "weight_cap_q": NaN,
+      "n": 12207,
+      "baseline": "OU_linear",
+      "model": "hinge_plateau_smooth",
+      "delta_aic": -638.946429697673,
+      "delta_bic": -616.7171351876641
+    },
+    {
+      "dt": 1,
+      "obs_class": "TT",
+      "weight_col": "unweighted",
+      "weight_cap_q": NaN,
+      "n": 12207,
+      "baseline": "OU_linear",
+      "model": "tanh_saturating",
+      "delta_aic": -225.81452916178387,
+      "delta_bic": -218.40476432511423
+    },
+    {
+      "dt": 1,
+      "obs_class": "TT",
+      "weight_col": "unweighted",
+      "weight_cap_q": NaN,
+      "n": 12207,
+      "baseline": "OU_linear",
+      "model": "rational_saturating",
+      "delta_aic": -212.56962270288568,
+      "delta_bic": -205.15985786621604
+    },
+    {
+      "dt": 1,
+      "obs_class": "TT",
+      "weight_col": "unweighted",
+      "weight_cap_q": NaN,
+      "n": 12207,
+      "baseline": "OU_linear",
+      "model": "OU_linear",
+      "delta_aic": 0.0,
+      "delta_bic": 0.0
+    }
+  ]
+}

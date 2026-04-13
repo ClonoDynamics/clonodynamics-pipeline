@@ -1,0 +1,62 @@
+{
+  "inputs": {
+    "transitions": "/Users/palmieri/Documents/tcr-dynamics_vs6/results/4-transitions/p_02/transitions_all.csv",
+    "trajectories": "/Users/palmieri/Documents/tcr-dynamics_vs6/results/3-trajectories/p_02/trajectories_long.csv",
+    "residuals": null
+  },
+  "run": {
+    "model": "hinge_plateau_smooth",
+    "dt": 1.0,
+    "obs_class": "TT",
+    "run_dir": "/Users/palmieri/Documents/tcr-dynamics_vs6/results/9-boot_full_pipeline/p02_TT_unweighted_hinge"
+  },
+  "filters": {
+    "weight_col": null,
+    "cluster_cols": [
+      "subject",
+      "aaSeqCDR3"
+    ],
+    "observable_col": "observable",
+    "observable_mode": "filter",
+    "observable_threshold": 0.5
+  },
+  "diffusion": {
+    "source_requested": "recompute_from_transitions",
+    "source_effective": "recompute_from_transitions",
+    "estimator": "var_mad"
+  },
+  "bootstrap": {
+    "bootstrap_reps": 500,
+    "bootstrap_seed": 123,
+    "ci": 0.95
+  },
+  "grid": {
+    "n_grid": 800,
+    "bulk_gridpoints": 721,
+    "bulk_trim_frac": 0.03,
+    "bulk_min_density_frac": 0.01
+  },
+  "fitting": {
+    "nbins_x_drift": 32,
+    "nbins_x_diff": 32,
+    "min_rows_per_bin": 200,
+    "hinge_smooth_sigma_pts": 1.0,
+    "smooth_p_sigma_pts": 2.0,
+    "smooth_D_sigma_pts": 2.0,
+    "smooth_J_sigma_pts": 2.0
+  },
+  "outputs": {
+    "J_boot_reps": "J_boot_reps.npy",
+    "S_boot_reps": "S_boot_reps.npy",
+    "J_summary": "J_summary.csv",
+    "S_summary": "S_summary.csv",
+    "global_summary": "global_summary.csv",
+    "drift_summary": "drift_summary.csv",
+    "diffusion_summary": "diffusion_summary.csv",
+    "drift_params": "drift_params.csv",
+    "diffusion_bins": "diffusion_bins.csv",
+    "flux_png": "flux_J.png",
+    "source_png": "source_S.png",
+    "report": "report.txt"
+  }
+}
