@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# VS Code local settings
+.vscode/
+
+# Local datasets and results
+datasets/
+dataset/
+dataset_*/
+results/
+results_*/
+*_results/
+
+
+# Large scientific outputs
+*.parquet
+*.npz
+
+# Logs / temporary files
+*.log
+*.tmp
+*.bak
