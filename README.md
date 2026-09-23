@@ -32,21 +32,21 @@ ClonoDynamics is designed for longitudinal RepSeq studies in which technical rep
 
 The current workflow can:
 
-- characterize repertoire abundance distributions and heavy-tail structure;
-- infer uncertainty-aware clonotype states from paired technical replicates;
-- quantify posterior uncertainty and replicate-posterior agreement;
-- construct multirepresentation longitudinal clonotype trajectories;
-- assemble finite-time transition datasets across temporal lags;
-- build a pseudo-longitudinal technical reference from exchangeable technical measurements;
-- quantify replicate-decoupled observed forward dynamics;
-- quantify replicate-consistent longitudinal fluctuations through cross-replicate covariance;
-- compare genuine longitudinal dynamics with pseudo-longitudinal technical nulls;
-- test finite-lag temporal scaling on a fixed abundance core and complete-case cohort;
-- validate temporal-signal recovery with support-conditioned synthetic positive controls;
-- test calendar-position and interval-composition sensitivity;
-- test operational observation-domain sensitivity at a fixed threshold;
-- test robustness across alternative operational observation thresholds;
-- regenerate publication figures without rerunning scientific inference.
+* characterize repertoire abundance distributions and heavy-tail structure;
+* infer uncertainty-aware clonotype states from paired technical replicates;
+* quantify posterior uncertainty and replicate-posterior agreement;
+* construct multirepresentation longitudinal clonotype trajectories;
+* assemble finite-time transition datasets across temporal lags;
+* build a pseudo-longitudinal technical reference from exchangeable technical measurements;
+* quantify replicate-decoupled observed forward dynamics;
+* quantify replicate-consistent longitudinal fluctuations through cross-replicate covariance;
+* compare genuine longitudinal dynamics with pseudo-longitudinal technical nulls;
+* test finite-lag temporal scaling on a fixed abundance core and complete-case cohort;
+* validate temporal-signal recovery with support-conditioned synthetic positive controls;
+* test calendar-position and interval-composition sensitivity;
+* test operational observation-domain sensitivity at a fixed threshold;
+* test robustness across alternative operational observation thresholds;
+* regenerate publication figures without rerunning scientific inference.
 
 The framework does **not** require a predefined stochastic differential equation, Fokker–Planck stationary reconstruction, or a parametric nonlinear drift law.
 
@@ -54,7 +54,9 @@ The framework does **not** require a predefined stochastic differential equation
 
 # Documentation
 
-The root `README.md` provides the conceptual overview, repository structure, and execution entry points for ClonoDynamics. Detailed scientific and computational methods are maintained under:
+The root `README.md` provides the conceptual overview, repository structure, and execution entry points for ClonoDynamics.
+
+Detailed scientific and computational methods are maintained under:
 
 ```text
 docs/methods/
@@ -62,16 +64,25 @@ docs/methods/
 
 The methods documentation is organized into three complementary documents:
 
-1. **[Primary analysis: Steps 1–13](docs/methods/01_primary_analysis.md)**  
+1. **[Primary analysis: Steps 1–13](docs/methods/01_primary_analysis.md)**
    Repertoire characterization, paired-replicate state inference, multirepresentation trajectory and transition construction, pseudo-longitudinal technical calibration, observed replicate-decoupled forward dynamics, cross-replicate fluctuation dynamics, longitudinal-versus-pseudo comparisons, and temporal scaling.
 
-2. **[Synthetic positive controls](docs/methods/02_positive_controls.md)**  
+2. **[Synthetic positive controls](docs/methods/02_positive_controls.md)**
    Support-conditioned semi-synthetic validation, frozen empirical calibration, oracle dose construction, synthetic repertoire generation, recovery through the production pipeline, verification, and recovery summaries.
 
-3. **[Robustness and sensitivity controls: Steps 14–16](docs/methods/03_robustness_controls.md)**  
+3. **[Robustness and sensitivity controls: Steps 14–16](docs/methods/03_robustness_controls.md)**
    Calendar-position and interval-composition controls, fixed-threshold operational observation-domain sensitivity, and numerical observation-threshold robustness.
 
 A compact index is available at **[`docs/methods/README.md`](docs/methods/README.md)**.
+
+Additional repository documentation includes:
+
+```text
+docs/data_contracts.md
+docs/outputs_reference.md
+docs/reproducibility.md
+docs/troubleshooting.md
+```
 
 ## Documentation and manuscript versioning
 
@@ -80,11 +91,12 @@ The files under `docs/methods/` are the **living scientific documentation** of t
 The exact methods corresponding to a submitted or published manuscript should instead be frozen together with the matching software version using a tagged release, for example:
 
 ```text
-v1.0.0-paper
+v1.0.0-biorxiv
 ```
 
-This separation allows the public repository to remain maintainable while preserving an immutable software-and-methods record for the reported study.
+or the corresponding publication release.
 
+This separation allows the public repository to remain maintainable while preserving an immutable software-and-methods record for the reported study.
 
 ---
 
@@ -107,6 +119,12 @@ ClonoDynamics/
 |   `-- 05_plotting/
 |
 `-- docs/
+    +-- README.md
+    +-- data_contracts.md
+    +-- outputs_reference.md
+    +-- reproducibility.md
+    +-- troubleshooting.md
+    |
     `-- methods/
         +-- README.md
         +-- 01_primary_analysis.md
@@ -114,7 +132,9 @@ ClonoDynamics/
         `-- 03_robustness_controls.md
 ```
 
-The master orchestrator is the only orchestration file required directly under `code/`. The `docs/methods/` directory provides the extended scientific documentation of the corresponding analysis blocks.
+The master orchestrator is the only orchestration file required directly under `code/`.
+
+---
 
 ## 01_core
 
@@ -131,6 +151,8 @@ Genuine longitudinal repertoire processing and transition construction.
 `-- 6-transition_support_characterization.py
 ```
 
+---
+
 ## 02_pseudo_reference
 
 Pseudo-longitudinal technical-reference construction.
@@ -143,6 +165,8 @@ Pseudo-longitudinal technical-reference construction.
 +-- pseudo_1x12_build_step8_transition_bank.py
 `-- 8-pseudo_fluctuation_conditioning_validation_pairbank.py
 ```
+
+---
 
 ## 03_validation
 
@@ -165,6 +189,8 @@ Primary genuine-longitudinal validation analyses plus synthetic positive control
     `-- verify_workflow.py
 ```
 
+---
+
 ## 04_controls
 
 Final robustness and sensitivity analyses.
@@ -175,6 +201,8 @@ Final robustness and sensitivity analyses.
 +-- 15-detectability_boundary_sensitivity.py
 `-- 16-analyze_observation_threshold_robustness.py
 ```
+
+---
 
 ## 05_plotting
 
@@ -217,37 +245,36 @@ The analysis is modular and is **not** a simple 1→16 linear chain.
                            GENUINE LONGITUDINAL DATA
                                       |
                                       v
-                                01_core
-                             Steps 1 → 6
+                                   01_core
+                                Steps 1 → 6
                                       |
-                      longitudinal_transitions.parquet
+                       longitudinal_transitions.parquet
                                       |
-                +---------------------+---------------------+
-                |                                           |
-                v                                           v
-       03_validation Step 9                        03_validation Step 11
-     observed AB/BA forward                    cross-replicate fluctuation
-                |                                           |
-                v                                  +--------+--------+
-             Step 10                               v                 v
-       real vs pseudo forward                   Step 12            Step 13
-                ^                          real vs pseudo       temporal scaling
-                |                             fluctuation           |
-                |                                  ^                |
-                |                                  |                v
-                |                                  |              Step 14
-                |                                  |       interval/composition controls
-                |                                  |                |
-                |                                  |                v
-                |                                  |              Step 15
-                |                                  |      fixed-threshold domain sensitivity
-                |                                  |                |
-                |                                  |                v
-                |                                  |              Step 16
-                |                                  |       cross-threshold robustness
-                |                                  |
-                |                                  |
-                `--------------- 02_pseudo_reference ---------------+
+                 +--------------------+--------------------+
+                 |                                         |
+                 v                                         v
+        03_validation Step 9                      03_validation Step 11
+      observed AB/BA forward                    cross-replicate fluctuation
+                 |                                         |
+                 v                                +--------+--------+
+              Step 10                             v                 v
+        real vs pseudo forward                  Step 12            Step 13
+                 ^                         real vs pseudo       temporal scaling
+                 |                            fluctuation            |
+                 |                                 ^                 |
+                 |                                 |                 v
+                 |                                 |               Step 14
+                 |                                 |       interval/composition controls
+                 |                                 |                 |
+                 |                                 |                 v
+                 |                                 |               Step 15
+                 |                                 |      fixed-threshold domain sensitivity
+                 |                                 |                 |
+                 |                                 |                 v
+                 |                                 |               Step 16
+                 |                                 |       cross-threshold robustness
+                 |                                 |
+                 `-------------- 02_pseudo_reference --------------+
                               Steps 7–8 technical reference
 ```
 
@@ -275,41 +302,41 @@ verify → summarize → plot
 
 Important consequences:
 
-- Step 1 and Step 3 are characterization/diagnostic layers.
-- Step 4 consumes the Step-2 multirepresentation clonotype-state table.
-- Step 5 consumes Step-4 trajectories and can propagate Step-2 full posterior uncertainty.
-- Step 6 characterizes the transition universe but is not a computational prerequisite for Steps 9–13.
-- Step 7 and Step 8 are pseudo-reference analyses and do not represent biological longitudinal time.
-- Step 10 compares Step 9 with pseudo Step 7.
-- Step 12 compares Step 11 with pseudo Step 8.
-- Step 12 does **not** feed Step 13.
-- Step 13 fits genuine longitudinal Step-11 results without subtracting the pseudo baseline.
-- Step 14 inherits the Step-13 abundance core and complete-case cohort and analyzes interval-resolved Step-11 quantities.
-- Step 15 keeps the operational threshold fixed at `alpha = 0.05` and changes the included operational observation domain.
-- Step 16 varies the numerical operational threshold and reuses the validated Step-15 implementation while keeping latent-state inference fixed.
-- Positive controls are a separate validation branch and are not pseudo-longitudinal randomizations.
+* Step 1 and Step 3 are characterization/diagnostic layers.
+* Step 4 consumes the Step-2 multirepresentation clonotype-state table.
+* Step 5 consumes Step-4 trajectories and can propagate Step-2 full posterior uncertainty.
+* Step 6 characterizes the transition universe but is not a computational prerequisite for Steps 9–13.
+* Step 7 and Step 8 are pseudo-reference analyses and do not represent biological longitudinal time.
+* Step 10 compares Step 9 with pseudo Step 7.
+* Step 12 compares Step 11 with pseudo Step 8.
+* Step 12 does **not** feed Step 13.
+* Step 13 fits genuine longitudinal Step-11 results without subtracting the pseudo baseline.
+* Step 14 inherits the Step-13 abundance core and complete-case cohort and analyzes interval-resolved Step-11 quantities.
+* Step 15 keeps the operational threshold fixed at `alpha = 0.05` and changes the included operational observation domain.
+* Step 16 varies the numerical operational threshold while keeping latent-state inference fixed.
+* Positive controls are a separate validation branch and are not pseudo-longitudinal randomizations.
 
 ---
 
 # Analysis modules
 
-- **Step 1 — core:** `1-repertoire_characterization.py` — repertoire-level descriptive characterization and heavy-tail analysis.
-- **Step 2 — core:** `2-multirepresentation_clonotype_state_inference.py` — replicate-resolved latent/state inference and operational observability.
-- **Core dependency:** `noiseK_latent.py` — count-noise / latent-state statistical engine used by Step 2.
-- **Step 3 — core diagnostic:** `3-latent_state_and_observation_model_diagnostics.py` — posterior uncertainty, replicate agreement, and observation-model diagnostics.
-- **Step 4 — core:** `4-multirepresentation_trajectory_assembly.py` — longitudinal assembly of latent and observed replicate-resolved states.
-- **Step 5 — core:** `5-longitudinal_transition_assembly.py` — generic finite-time longitudinal transition table.
-- **Step 6 — core diagnostic:** `6-transition_support_characterization.py` — coverage, observation classes, and estimand-support characterization.
-- **Step 7 — pseudo:** `7-pseudo_forward_technical_null_compact.py` — pseudo technical null for replicate-decoupled forward structure.
-- **Step 8 — pseudo:** `8-pseudo_fluctuation_conditioning_validation_pairbank.py` — pseudo technical reference for replicate-consistent fluctuation covariance.
-- **Step 9 — validation:** `9-observed_replicate_decoupled_forward_drift.py` — genuine observed replicate-decoupled AB/BA forward dynamics.
-- **Step 10 — validation:** `10-longitudinal_vs_pseudo_forward_null.py` — genuine forward dynamics versus pseudo technical null.
-- **Step 11 — validation:** `11-cross_replicate_fluctuation_dynamics.py` — replicate-consistent longitudinal fluctuation covariance.
-- **Step 12 — validation:** `12-longitudinal_vs_pseudo_cross_replicate_fluctuations.py` — genuine cross-replicate covariance versus pseudo technical null.
-- **Step 13 — validation:** `13-temporal_fluctuation_scaling.py` — finite-lag temporal scaling on a fixed abundance core.
-- **Step 14 — controls:** `14-interval_position_structure.py` — calendar-position, anchoring, and subject-composition controls.
-- **Step 15 — controls:** `15-detectability_boundary_sensitivity.py` — fixed-threshold operational observation-domain sensitivity.
-- **Step 16 — controls:** `16-analyze_observation_threshold_robustness.py` — cross-threshold robustness of operational observation-domain conclusions.
+* **Step 1 — core:** `1-repertoire_characterization.py` — repertoire-level descriptive characterization and heavy-tail analysis.
+* **Step 2 — core:** `2-multirepresentation_clonotype_state_inference.py` — replicate-resolved latent/state inference and operational observability.
+* **Core dependency:** `noiseK_latent.py` — count-noise / latent-state statistical engine used by Step 2.
+* **Step 3 — core diagnostic:** `3-latent_state_and_observation_model_diagnostics.py` — posterior uncertainty, replicate agreement, and observation-model diagnostics.
+* **Step 4 — core:** `4-multirepresentation_trajectory_assembly.py` — longitudinal assembly of latent and observed replicate-resolved states.
+* **Step 5 — core:** `5-longitudinal_transition_assembly.py` — generic finite-time longitudinal transition table.
+* **Step 6 — core diagnostic:** `6-transition_support_characterization.py` — coverage, observation classes, and estimand-support characterization.
+* **Step 7 — pseudo:** `7-pseudo_forward_technical_null_compact.py` — pseudo technical null for replicate-decoupled forward structure.
+* **Step 8 — pseudo:** `8-pseudo_fluctuation_conditioning_validation_pairbank.py` — pseudo technical reference for replicate-consistent fluctuation covariance.
+* **Step 9 — validation:** `9-observed_replicate_decoupled_forward_drift.py` — genuine observed replicate-decoupled AB/BA forward dynamics.
+* **Step 10 — validation:** `10-longitudinal_vs_pseudo_forward_null.py` — genuine forward dynamics versus pseudo technical null.
+* **Step 11 — validation:** `11-cross_replicate_fluctuation_dynamics.py` — replicate-consistent longitudinal fluctuation covariance.
+* **Step 12 — validation:** `12-longitudinal_vs_pseudo_cross_replicate_fluctuations.py` — genuine cross-replicate covariance versus pseudo technical null.
+* **Step 13 — validation:** `13-temporal_fluctuation_scaling.py` — finite-lag temporal scaling on a fixed abundance core.
+* **Step 14 — controls:** `14-interval_position_structure.py` — calendar-position, anchoring, and subject-composition controls.
+* **Step 15 — controls:** `15-detectability_boundary_sensitivity.py` — fixed-threshold operational observation-domain sensitivity.
+* **Step 16 — controls:** `16-analyze_observation_threshold_robustness.py` — cross-threshold robustness of operational observation-domain conclusions.
 
 ---
 
@@ -330,34 +357,36 @@ $$
 with
 
 $$
-\mathrm{Var}(C_r\mid f) = \mu+\frac{\mu^2}{\kappa}.
+\mathrm{Var}(C_r\mid f)
+=
+\mu+\frac{\mu^2}{\kappa}.
 $$
 
 Latent frequency is represented on a discrete log-frequency grid. Pair-specific parameters and clonotype-level posterior quantities are inferred from the technical-replicate pair.
 
 The state layer stores, among other quantities:
 
-- latent-frequency summaries;
-- latent log-frequency uncertainty;
-- replicate-specific observed abundance;
-- replicate-specific posterior summaries;
-- replicate-posterior overlap;
-- endpoint observation-model quantities;
-- operational observation state;
-- optional full posterior distributions for downstream uncertainty propagation.
+* latent-frequency summaries;
+* latent log-frequency uncertainty;
+* replicate-specific observed abundance;
+* replicate-specific posterior summaries;
+* replicate-posterior overlap;
+* endpoint observation-model quantities;
+* operational observation state;
+* optional full posterior distributions for downstream uncertainty propagation.
 
 Two concepts must remain distinct:
 
-- **posterior/model-based detectability**, which is a property of the fitted observation model;
-- **operational observability**, defined from the endpoint `p_value` and a chosen threshold `alpha`.
+* **posterior/model-based detectability**, which is a property of the fitted observation model;
+* **operational observability**, defined from the endpoint `p_value` and a chosen threshold `alpha`.
 
-The primary reference threshold is
+The primary reference threshold is:
 
 ```text
 alpha = 0.05
 ```
 
-but this threshold does not alter the latent-frequency fit. Step 16 varies only the operational T/F classification.
+This threshold does not alter the latent-frequency fit. Step 16 varies only the operational T/F classification.
 
 No longitudinal dynamical model is imposed during Step 2.
 
@@ -400,7 +429,9 @@ support:
 The two folds are combined **after abundance binning** with exact equal weight:
 
 $$
-\mathrm{AB/BA\ combined} = 0.5\,\mathrm{AB}+0.5\,\mathrm{BA}.
+\mathrm{AB/BA\ combined}
+=
+0.5\,\mathrm{AB}+0.5\,\mathrm{BA}.
 $$
 
 No row-count weighting is used.
@@ -411,10 +442,11 @@ This geometry prevents the same observed replicate from simultaneously defining 
 
 ## Step 11 — replicate-consistent fluctuation dynamics
 
-The primary fluctuation estimand is
+The primary fluctuation estimand is:
 
 $$
-V_{\mathrm{cross}} =
+V_{\mathrm{cross}}
+=
 \mathrm{Cov}\left(
 \Delta x^{(1)}_{\mathrm{obs}},
 \Delta x^{(2)}_{\mathrm{obs}}
@@ -433,10 +465,11 @@ where:
 
 The corresponding code-level quantity is `cross_cov`.
 
-The mean within-replicate variance, stored as `same_var_mean`, is
+The mean within-replicate variance, stored as `same_var_mean`, is:
 
 $$
-V_{\mathrm{same}} =
+V_{\mathrm{same}}
+=
 \frac{
 \mathrm{Var}\left(\Delta x^{(1)}_{\mathrm{obs}}\right)
 +
@@ -444,12 +477,12 @@ V_{\mathrm{same}} =
 }{2}.
 $$
 
-The replicate-specific excess, stored as `replicate_specific_excess`, is
+The replicate-specific excess, stored as `replicate_specific_excess`, is:
 
 $$
-V_{\mathrm{excess}} =
-V_{\mathrm{same}} -
-V_{\mathrm{cross}}.
+V_{\mathrm{excess}}
+=
+V_{\mathrm{same}}-V_{\mathrm{cross}}.
 $$
 
 `cross_cov` is signed and is never clipped at zero.
@@ -479,10 +512,10 @@ primary estimator:
     then equal-subject across the cohort
 ```
 
-The primary signed descriptor is
+The primary signed descriptor is:
 
 $$
-M(\Delta t) = K + D(\Delta t-1),
+M(\Delta t)=K+D(\Delta t-1),
 $$
 
 where \(D\) is the temporal slope per week.
@@ -521,9 +554,35 @@ The production ensemble contains:
 2,000 pseudo-time configurations
 ```
 
+The exact pseudo-design is generated by:
+
+```text
+code/02_pseudo_reference/00-generate_pseudo_design.py
+```
+
+using:
+
+```text
+design seed = 12345
+```
+
+Pairing and pseudo-time order are randomized.
+
+Within-pair A/B exchange does not define an additional configuration because downstream AB/BA and covariance estimands are symmetric with respect to within-pair label exchange.
+
+The exact production configurations are stored in:
+
+```text
+source_measurements.tsv
+pseudo_configurations.tsv
+pseudo_configurations_wide.tsv
+```
+
+Each of the 2,000 configurations uses all 12 source measurements exactly once.
+
 ## Pair bank
 
-Twelve measurements define
+Twelve measurements define:
 
 $$
 \binom{12}{2}=66
@@ -558,7 +617,7 @@ primary metric:
 
 The current implementation uses a reusable pair-transition bank so that the same pair-vs-pair transition block is not recomputed independently in all 2,000 pseudo configurations.
 
-Randomization intervals across configurations are technical-reference intervals, not biological confidence intervals.
+Pseudo-time lags and randomization intervals across configurations are technical-reference quantities, not biological durations or biological confidence intervals.
 
 ---
 
@@ -585,8 +644,8 @@ Pseudo missing bins are not interpolated or imputed.
 
 The comparison is repeated in within-unit abundance-percentile space:
 
-- within subject/fold for the genuine cohort;
-- within pseudo configuration/fold for the technical reference.
+* within subject/fold for the genuine cohort;
+* within pseudo configuration/fold for the technical reference.
 
 Pseudo configurations remain randomization units and are never treated as biological replicates.
 
@@ -617,11 +676,11 @@ Its purpose is to test whether the production pipeline can recover a known injec
 
 The empirical analysis is not rebuilt. The validation branch freezes the finalized real-data calibration, including:
 
-- empirical source/support structure;
-- Step-2 parameters;
-- Step-11 abundance grid;
-- Step-13 abundance core;
-- Step-13 complete-case subject cohort.
+* empirical source/support structure;
+* Step-2 parameters;
+* Step-11 abundance grid;
+* Step-13 abundance core;
+* Step-13 complete-case subject cohort.
 
 Four production scenarios are generated:
 
@@ -630,6 +689,12 @@ R0p00
 R0p25
 R0p50
 R1p00
+```
+
+The frozen simulation seed for the production validation is:
+
+```text
+20260918
 ```
 
 For each scenario:
@@ -662,17 +727,17 @@ Step 14 asks whether the temporal result from Step 13 could be materially driven
 
 It inherits:
 
-- the Step-13 fixed abundance core;
-- the Step-13 complete-case subject universe.
+* the Step-13 fixed abundance core;
+* the Step-13 complete-case subject universe.
 
 It analyzes interval-resolved Step-11 quantities and evaluates:
 
-- synchronized calendar-position structure;
-- common-start anchored temporal profiles;
-- common-end anchored temporal profiles;
-- available-subject analyses;
-- matched-all-lags subject analyses;
-- abundance-resolved anchored sensitivity.
+* synchronized calendar-position structure;
+* common-start anchored temporal profiles;
+* common-end anchored temporal profiles;
+* available-subject analyses;
+* matched-all-lags subject analyses;
+* abundance-resolved anchored sensitivity.
 
 Step 14 does not redefine the Step-13 primary cohort or abundance core.
 
@@ -680,7 +745,7 @@ Step 14 does not redefine the Step-13 primary cohort or abundance core.
 
 ## Step 15 — fixed-threshold observation-domain sensitivity
 
-Step 15 keeps
+Step 15 keeps:
 
 ```text
 alpha = 0.05
@@ -743,13 +808,13 @@ Only the operational T/F classification changes.
 
 Step 16:
 
-- does not refit latent abundance;
-- does not change the Step-9 forward estimand;
-- does not change the Step-11 fluctuation estimand;
-- does not replace the Step-13 temporal estimator;
-- reuses the validated Step-15 analysis implementation across thresholds;
-- uses paired biological-subject bootstrap draws across alpha;
-- constructs common cross-alpha forward and temporal support.
+* does not refit latent abundance;
+* does not change the Step-9 forward estimand;
+* does not change the Step-11 fluctuation estimand;
+* does not replace the Step-13 temporal estimator;
+* reuses the validated observation-domain analysis across thresholds;
+* uses paired biological-subject bootstrap draws across alpha;
+* constructs common cross-alpha forward and temporal support.
 
 The finalized alpha=0.05 Step-15 output can also be used as an external replication audit of the Step-16 reference-threshold branch.
 
@@ -761,12 +826,14 @@ ClonoDynamics starts from processed clonotype-level repertoire tables, not raw F
 
 For core Steps 1–2, each repertoire table must contain at least:
 
-| Column | Meaning |
-|---|---|
+| Column      | Meaning                              |
+| ----------- | ------------------------------------ |
 | `aaSeqCDR3` | amino-acid CDR3 clonotype identifier |
-| `readCount` | clonotype sequencing read count |
+| `readCount` | clonotype sequencing read count      |
 
 `readFraction` may be present but is not required if it can be reconstructed from `readCount`.
+
+When multiple rows contain the same `aaSeqCDR3`, read counts should be aggregated before entering the production pipeline and `readFraction` recalculated from the aggregated counts.
 
 ## Longitudinal filenames
 
@@ -824,7 +891,7 @@ The master first explains the project and then asks whether to enter:
 
 ## Analysis menu
 
-The analysis interface exposes five blocks.
+The analysis interface exposes five blocks:
 
 ```text
 [1] core
@@ -861,12 +928,12 @@ reference operational alpha
 
 Builds:
 
-- the pseudo design;
-- the 66-pair state bank;
-- the 2,000 compact pseudo configurations;
-- Step 7;
-- the reusable Step-8 transition bank;
-- Step 8.
+* the pseudo design;
+* the 66-pair state bank;
+* the 2,000 compact pseudo configurations;
+* Step 7;
+* the reusable Step-8 transition bank;
+* Step 8.
 
 ### Validation
 
@@ -882,7 +949,7 @@ Runs Steps 9–13.
 
 Pseudo Step 7 is required for Step 10.
 
-Pseudo Step 8 is required only for Step 12. If pseudo Step 8 is incomplete, the remaining genuine-data branches can still proceed.
+Pseudo Step 8 is required for Step 12.
 
 ### Positive controls
 
@@ -921,9 +988,9 @@ The orchestrators use conservative existing-output policies.
 Typical behavior:
 
 ```text
-complete step  → skip
-missing step   → run
-interrupted resumable work → reuse compatible checkpoints
+complete step               → skip
+missing step                → run
+interrupted resumable work  → reuse compatible checkpoints
 ```
 
 ## Fresh
@@ -999,6 +1066,8 @@ dataset_pseudo_results/
 +-- pseudo_configurations.tsv
 +-- pseudo_configurations_wide.tsv
 +-- 00_pseudo_1x12_config.json
++-- 00_pseudo_orchestrator_config.json
++-- 00_pseudo_orchestrator_step_manifest.csv
 |
 +-- pair_bank_multirepresentation/
 |   +-- pair_bank_manifest.tsv
@@ -1146,7 +1215,7 @@ choose:
 Figures
 ```
 
-The figure interface then allows interactive selection of:
+The figure interface allows interactive selection of:
 
 ```text
 core
@@ -1157,7 +1226,7 @@ controls
 controls_details
 ```
 
-The canonical plotting workflow is read-only with respect to the finalized analysis tables.
+The canonical plotting workflow is read-only with respect to finalized analysis tables.
 
 A typical figure root is:
 
@@ -1177,30 +1246,79 @@ The individual detailed Step-14/15/16 plotters are optional and are not part of 
 
 # Reproducibility and provenance
 
-The scientific definitions, estimands, support rules, and block-specific computational procedures are documented in [`docs/methods/`](docs/methods/README.md). Reproducibility therefore relies on the combination of **code + recorded provenance + matching methods documentation**, rather than on script names alone.
+The scientific definitions, estimands, support rules, and block-specific computational procedures are documented in [`docs/methods/`](docs/methods/README.md).
 
+Reproducibility therefore relies on the combination of:
+
+```text
+code
++
+recorded provenance
++
+frozen inputs/design manifests
++
+matching methods documentation
+```
+
+rather than on script names alone.
 
 ClonoDynamics is designed around explicit intermediate states and dependency-aware reruns.
 
 Depending on the block, the workflow records:
 
-- input paths;
-- output paths;
-- operational threshold;
-- random seeds;
-- bootstrap settings;
-- pseudo-configuration counts;
-- code/script hashes;
-- analysis signatures;
-- Python executable and version;
-- timestamps;
-- command lines;
-- step-specific logs;
-- resumable checkpoint state.
+* input paths;
+* output paths;
+* operational threshold;
+* random seeds;
+* bootstrap settings;
+* pseudo-configuration counts;
+* code/script hashes;
+* analysis signatures;
+* Python executable and version;
+* timestamps;
+* command lines;
+* step-specific logs;
+* resumable checkpoint state.
 
-The master embeds the validated orchestration engines and verifies their embedded source hashes before execution.
+For the pseudo-reference, the exact 2,000-configuration design is preserved through:
 
-The individual scientific scripts remain directly executable for development, testing, and methodological inspection.
+```text
+source_measurements.tsv
+pseudo_configurations.tsv
+pseudo_configurations_wide.tsv
+```
+
+together with the frozen generator and:
+
+```text
+design seed = 12345
+```
+
+The pseudo analysis uses a separate analysis seed:
+
+```text
+analysis seed = 123
+```
+
+The synthetic positive-control generation uses:
+
+```text
+simulation seed = 20260918
+```
+
+The exact manuscript release should additionally record:
+
+* Git commit SHA;
+* release tag;
+* complete Python environment;
+* MiXCR version;
+* input-file checksums;
+* script SHA256 hashes;
+* SRA/BioProject accessions;
+* software DOI;
+* derived-data DOI.
+
+Large expanded computational intermediates do not need to be archived when they are deterministically reproducible from the frozen public inputs, design manifests, and software release.
 
 ---
 
@@ -1269,13 +1387,15 @@ Example data should be treated as workflow-demonstration material and not as a s
 
 # Requirements
 
-Recommended environment:
+The frozen manuscript release should record the exact environment used for production analyses.
+
+The current production environment is compatible with:
 
 ```text
 Python >= 3.9
 ```
 
-Core packages used across the current pipeline include:
+Core packages used across the pipeline include:
 
 ```text
 numpy
@@ -1288,7 +1408,7 @@ matplotlib
 
 Individual modules may require additional packages.
 
-A public release should include a pinned environment specification or `requirements.txt`.
+The manuscript release should include a pinned environment specification or equivalent package freeze.
 
 ---
 
@@ -1296,21 +1416,29 @@ A public release should include a pinned environment specification or `requireme
 
 ClonoDynamics operates on processed clonotype-level repertoire tables.
 
-Final public releases should provide links to:
+The manuscript release will provide persistent access to the different data layers separately.
 
 ```text
 Raw sequencing:
-    [NCBI SRA accession]
+    NCBI Sequence Read Archive
+    BioProject: [TO BE ADDED]
+    SRA Study:  [TO BE ADDED]
 
-Processed repertoire and analysis data:
-    [Zenodo / Figshare / institutional repository DOI]
+Processed repertoire and reproducibility data:
+    Zenodo
+    DOI: [TO BE ADDED]
 
 Source repository:
     https://github.com/ClonoDynamics/clonodynamics-pipeline
 
-Software release:
-    [GitHub release / Zenodo DOI]
+Frozen software release:
+    GitHub release / Zenodo
+    DOI: [TO BE ADDED]
 ```
+
+Raw FASTQ files deposited in SRA are not duplicated in the derived-data archive.
+
+The reproducibility archive should contain, among other compact provenance objects, the exact pseudo-design manifests and configuration-level outputs required to reconstruct the 2,000-configuration technical reference.
 
 ---
 
@@ -1346,24 +1474,29 @@ ClonoDynamics Reference Space
 
 # Citation
 
-If you use ClonoDynamics, please cite the associated methods paper:
+If you use ClonoDynamics, please cite the associated manuscript and archived software release:
 
 ```text
 ClonoDynamics: replicate-resolved inference and validation
 of longitudinal T-cell receptor repertoire dynamics
 
-[full citation / DOI to be added]
+[full manuscript citation / DOI to be added]
+
+Software DOI:
+[to be added]
+
+Reproducibility-data DOI:
+[to be added]
 ```
 
-A `CITATION.cff` file should be included in the public repository once the final citation is available.
+A machine-readable `CITATION.cff` file should accompany the public release.
 
 ---
 
 # Contact
 
 Prof. Camillo Palmieri, PhD
-Full Professor of Clinical Biochemistry
-University Magna Grecia of Catanzaro, Italy.
-cpalmieri@unicz.it
+Università Magna Græcia di Catanzaro, Italy
+[cpalmieri@unicz.it](mailto:cpalmieri@unicz.it)
 
 For questions about the software, reproducibility, or methodological implementation, please use the GitHub issue tracker or contact the corresponding author.
