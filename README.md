@@ -414,13 +414,12 @@ This geometry prevents the same observed replicate from simultaneously defining 
 The primary fluctuation estimand is
 
 $$
-\mathrm{cross_cov} =
-\mathrm{Cov}
-\left(
+V_{\mathrm{cross}} =
+\mathrm{Cov}\left(
 \Delta x^{(1)}_{\mathrm{obs}},
 \Delta x^{(2)}_{\mathrm{obs}}
 \mid
-x_{\mathrm{mid,latent}},
+x_{\mathrm{mid}}^{\mathrm{latent}},
 \Delta t,
 \mathrm{common4}
 \right).
@@ -428,25 +427,29 @@ $$
 
 where:
 
-- `dx_observed_rep1` and `dx_observed_rep2` remain replicate-specific;
-- `xmid_latent` is the transition-centred latent conditioning coordinate;
-- `common4` defines the four-measure support required to evaluate both replicate displacements.
+* `dx_observed_rep1` and `dx_observed_rep2` remain replicate-specific;
+* `xmid_latent` is the transition-centred latent conditioning coordinate;
+* `common4` defines the four-measure support required to evaluate both replicate displacements.
 
-Complementary quantities are
+The corresponding code-level quantity is `cross_cov`.
+
+The mean within-replicate variance, stored as `same_var_mean`, is
 
 $$
 V_{\mathrm{same}} =
 \frac{
-\operatorname{Var}\!\left(\Delta x^{(1)}_{\mathrm{obs}}\right)
+\mathrm{Var}\left(\Delta x^{(1)}_{\mathrm{obs}}\right)
 +
-\operatorname{Var}\!\left(\Delta x^{(2)}_{\mathrm{obs}}\right)
+\mathrm{Var}\left(\Delta x^{(2)}_{\mathrm{obs}}\right)
 }{2}.
 $$
 
-and
+The replicate-specific excess, stored as `replicate_specific_excess`, is
 
 $$
-\mathrm{replicate\_specific\_excess} = \mathrm{same\_var\_mean} - \mathrm{cross_cov}.
+V_{\mathrm{excess}} =
+V_{\mathrm{same}} -
+V_{\mathrm{cross}}.
 $$
 
 `cross_cov` is signed and is never clipped at zero.
@@ -479,11 +482,7 @@ primary estimator:
 The primary signed descriptor is
 
 $$
-M(\Delta t)
-=
-K
-+
-D(\Delta t-1),
+M(\Delta t) = K + D(\Delta t-1),
 $$
 
 where \(D\) is the temporal slope per week.
