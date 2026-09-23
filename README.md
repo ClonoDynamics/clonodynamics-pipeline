@@ -435,12 +435,7 @@ where:
 Complementary quantities are
 
 $$
-\mathrm{same_var_mean} =
-\frac{
-\mathrm{Var}(\Delta x^{(1)}_{\mathrm{obs}})
-+
-\mathrm{Var}(\Delta x^{(2)}_{\mathrm{obs}})
-}{2},
+\mathrm{same_var_mean} = \frac{\mathrm{Var}(\Delta x^{(1)}_{\mathrm{obs}}) + \mathrm{Var}(\Delta x^{(2)}_{\mathrm{obs}})}{2},
 $$
 
 and
