@@ -330,9 +330,7 @@ $$
 with
 
 $$
-\mathrm{Var}(C_r\mid f)
-=
-\mu+\frac{\mu^2}{\kappa}.
+\mathrm{Var}(C_r\mid f) = \mu+\frac{\mu^2}{\kappa}.
 $$
 
 Latent frequency is represented on a discrete log-frequency grid. Pair-specific parameters and clonotype-level posterior quantities are inferred from the technical-replicate pair.
