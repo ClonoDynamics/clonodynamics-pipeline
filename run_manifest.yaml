@@ -48,5 +48,5 @@ data:
 
 release:
   software_doi: TODO
-  reproducibility_data_doi: TODO
+  reproducibility_data_doi: 10.5281/zenodo.22925114
   biorxiv_doi: TODO
