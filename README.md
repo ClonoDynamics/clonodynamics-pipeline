@@ -433,15 +433,20 @@ where:
 - `common4` defines the four-measure support required to evaluate both replicate displacements.
 
 Complementary quantities are
-{
+
 $$
-\mathrm{same_var_mean} = \frac{\mathrm{Var}(\Delta x^{(1)}_{\mathrm{obs}}) + \mathrm{Var}(\Delta x^{(2)}_{\mathrm{obs}})}{2},
+\mathrm{same\_var\_mean} =
+\frac{
+\operatorname{Var}\!\left(\Delta x^{(1)}_{\mathrm{obs}}\right)
++
+\operatorname{Var}\!\left(\Delta x^{(2)}_{\mathrm{obs}}\right)
+}{2}.
 $$
-}
+
 and
 
 $$
-\mathrm{replicate_specific_excess} = \mathrm{same_var_mean} - \mathrm{cross_cov}.
+\mathrm{replicate\_specific\_excess} = \mathrm{same\_var\_mean} - \mathrm{cross_cov}.
 $$
 
 `cross_cov` is signed and is never clipped at zero.
