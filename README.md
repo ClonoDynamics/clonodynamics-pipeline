@@ -433,11 +433,11 @@ where:
 - `common4` defines the four-measure support required to evaluate both replicate displacements.
 
 Complementary quantities are
-
+{
 $$
 \mathrm{same_var_mean} = \frac{\mathrm{Var}(\Delta x^{(1)}_{\mathrm{obs}}) + \mathrm{Var}(\Delta x^{(2)}_{\mathrm{obs}})}{2},
 $$
-
+}
 and
 
 $$
