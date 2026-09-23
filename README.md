@@ -400,9 +400,7 @@ support:
 The two folds are combined **after abundance binning** with exact equal weight:
 
 $$
-\mathrm{AB/BA\ combined}
-=
-0.5\,\mathrm{AB}+0.5\,\mathrm{BA}.
+\mathrm{AB/BA\ combined} = 0.5\,\mathrm{AB}+0.5\,\mathrm{BA}.
 $$
 
 No row-count weighting is used.
@@ -416,8 +414,7 @@ This geometry prevents the same observed replicate from simultaneously defining 
 The primary fluctuation estimand is
 
 $$
-\mathrm{cross_cov}
-=
+\mathrm{cross_cov} =
 \mathrm{Cov}
 \left(
 \Delta x^{(1)}_{\mathrm{obs}},
@@ -438,8 +435,7 @@ where:
 Complementary quantities are
 
 $$
-\mathrm{same_var_mean}
-=
+\mathrm{same_var_mean} =
 \frac{
 \mathrm{Var}(\Delta x^{(1)}_{\mathrm{obs}})
 +
@@ -450,11 +446,7 @@ $$
 and
 
 $$
-\mathrm{replicate_specific_excess}
-=
-\mathrm{same_var_mean}
--
-\mathrm{cross_cov}.
+\mathrm{replicate_specific_excess} = \mathrm{same_var_mean} - \mathrm{cross_cov}.
 $$
 
 `cross_cov` is signed and is never clipped at zero.
