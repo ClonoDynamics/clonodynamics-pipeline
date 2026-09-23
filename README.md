@@ -52,20 +52,30 @@ The framework does **not** require a predefined stochastic differential equation
 
 ---
 
+## Documentation
+
+Detailed scientific documentation is available in
+[`docs/methods/`](docs/methods/README.md):
+
+- [Primary analysis: Steps 1–13](docs/methods/01_primary_analysis.md)
+- [Synthetic positive controls](docs/methods/02_positive_controls.md)
+- [Robustness controls: Steps 14–16](docs/methods/03_robustness_controls.md)
+
+
 # Repository architecture
 
 The public repository is organized into five computational blocks.
 
 ```text
 code/
-│
-├── orchestrator_clonodynamics.py
-│
-├── 01_core/
-├── 02_pseudo_reference/
-├── 03_validation/
-├── 04_controls/
-└── 05_plotting/
+|
++-- orchestrator_clonodynamics.py
+|
++-- 01_core/
++-- 02_pseudo_reference/
++-- 03_validation/
++-- 04_controls/
+`-- 05_plotting/
 ```
 
 The master orchestrator is the only orchestration file required under `code/`.
@@ -76,13 +86,13 @@ Genuine longitudinal repertoire processing and transition construction.
 
 ```text
 01_core/
-├── 1-repertoire_characterization.py
-├── 2-multirepresentation_clonotype_state_inference.py
-├── noiseK_latent.py
-├── 3-latent_state_and_observation_model_diagnostics.py
-├── 4-multirepresentation_trajectory_assembly.py
-├── 5-longitudinal_transition_assembly.py
-└── 6-transition_support_characterization.py
++-- 1-repertoire_characterization.py
++-- 2-multirepresentation_clonotype_state_inference.py
++-- noiseK_latent.py
++-- 3-latent_state_and_observation_model_diagnostics.py
++-- 4-multirepresentation_trajectory_assembly.py
++-- 5-longitudinal_transition_assembly.py
+`-- 6-transition_support_characterization.py
 ```
 
 ## 02_pseudo_reference
@@ -91,11 +101,11 @@ Pseudo-longitudinal technical-reference construction.
 
 ```text
 02_pseudo_reference/
-├── 00-generate_pseudo_design.py
-├── pseudo_1x12_build_upstream_multirepresentation_streaming.py
-├── 7-pseudo_forward_technical_null_compact.py
-├── pseudo_1x12_build_step8_transition_bank.py
-└── 8-pseudo_fluctuation_conditioning_validation_pairbank.py
++-- 00-generate_pseudo_design.py
++-- pseudo_1x12_build_upstream_multirepresentation_streaming.py
++-- 7-pseudo_forward_technical_null_compact.py
++-- pseudo_1x12_build_step8_transition_bank.py
+`-- 8-pseudo_fluctuation_conditioning_validation_pairbank.py
 ```
 
 ## 03_validation
@@ -104,19 +114,19 @@ Primary genuine-longitudinal validation analyses plus synthetic positive control
 
 ```text
 03_validation/
-├── 9-observed_replicate_decoupled_forward_drift.py
-├── 10-longitudinal_vs_pseudo_forward_null.py
-├── 11-cross_replicate_fluctuation_dynamics.py
-├── 12-longitudinal_vs_pseudo_cross_replicate_fluctuations.py
-├── 13-temporal_fluctuation_scaling.py
-│
-└── positive_controls/
-    ├── 01_freeze_empirical_calibration.py
-    ├── 02_calibrate_oracle_doses.py
-    ├── 03_generate_support_conditioned_repertoires.py
-    ├── 04_summarize_temporal_recovery.py
-    ├── 05_plot_synthetic_validation.py
-    └── verify_workflow.py
++-- 9-observed_replicate_decoupled_forward_drift.py
++-- 10-longitudinal_vs_pseudo_forward_null.py
++-- 11-cross_replicate_fluctuation_dynamics.py
++-- 12-longitudinal_vs_pseudo_cross_replicate_fluctuations.py
++-- 13-temporal_fluctuation_scaling.py
+|
+`-- positive_controls/
+    +-- 01_freeze_empirical_calibration.py
+    +-- 02_calibrate_oracle_doses.py
+    +-- 03_generate_support_conditioned_repertoires.py
+    +-- 04_summarize_temporal_recovery.py
+    +-- 05_plot_synthetic_validation.py
+    `-- verify_workflow.py
 ```
 
 ## 04_controls
@@ -125,9 +135,9 @@ Final robustness and sensitivity analyses.
 
 ```text
 04_controls/
-├── 14-interval_position_structure.py
-├── 15-detectability_boundary_sensitivity.py
-└── 16-analyze_observation_threshold_robustness.py
++-- 14-interval_position_structure.py
++-- 15-detectability_boundary_sensitivity.py
+`-- 16-analyze_observation_threshold_robustness.py
 ```
 
 ## 05_plotting
@@ -136,27 +146,27 @@ Read-only publication plotting.
 
 ```text
 05_plotting/
-├── 01_core/
-│   ├── plot_step01_repertoire_characterization.py
-│   ├── plot_step03_latent_state_diagnostics.py
-│   └── plot_step06_transition_support.py
-│
-├── 02_pseudo_reference/
-│   └── plot_steps07_08_pseudo_reference.py
-│
-├── 03_validation/
-│   ├── plot_steps09_10_forward_dynamics.py
-│   ├── plot_steps11_12_fluctuation_dynamics.py
-│   ├── plot_step13_temporal_scaling.py
-│   └── positive_controls/
-│       └── plot_positive_controls.py
-│
-└── 04_controls/
-    ├── plot_steps14_16_robustness_summary.py
-    └── details/
-        ├── plot_step14_interval_position_details.py
-        ├── plot_step15_observation_domain_details.py
-        └── plot_step16_threshold_robustness_details.py
++-- 01_core/
+|   +-- plot_step01_repertoire_characterization.py
+|   +-- plot_step03_latent_state_diagnostics.py
+|   `-- plot_step06_transition_support.py
+|
++-- 02_pseudo_reference/
+|   `-- plot_steps07_08_pseudo_reference.py
+|
++-- 03_validation/
+|   +-- plot_steps09_10_forward_dynamics.py
+|   +-- plot_steps11_12_fluctuation_dynamics.py
+|   +-- plot_step13_temporal_scaling.py
+|   `-- positive_controls/
+|       `-- plot_positive_controls.py
+|
+`-- 04_controls/
+    +-- plot_steps14_16_robustness_summary.py
+    `-- details/
+        +-- plot_step14_interval_position_details.py
+        +-- plot_step15_observation_domain_details.py
+        `-- plot_step16_threshold_robustness_details.py
 ```
 
 The three detailed Step-14/15/16 plotters are retained for inspection and supplementary rendering. The standard figure workflow uses the integrated Steps-14–16 robustness plotter.
@@ -169,39 +179,39 @@ The analysis is modular and is **not** a simple 1→16 linear chain.
 
 ```text
                            GENUINE LONGITUDINAL DATA
-                                      │
-                                      ▼
+                                      |
+                                      v
                                 01_core
                              Steps 1 → 6
-                                      │
+                                      |
                       longitudinal_transitions.parquet
-                                      │
-                ┌─────────────────────┴─────────────────────┐
-                │                                           │
-                ▼                                           ▼
+                                      |
+                +---------------------+---------------------+
+                |                                           |
+                v                                           v
        03_validation Step 9                        03_validation Step 11
      observed AB/BA forward                    cross-replicate fluctuation
-                │                                           │
-                ▼                                  ┌────────┴────────┐
-             Step 10                               ▼                 ▼
+                |                                           |
+                v                                  +--------+--------+
+             Step 10                               v                 v
        real vs pseudo forward                   Step 12            Step 13
-                ▲                          real vs pseudo       temporal scaling
-                │                             fluctuation           │
-                │                                  ▲                │
-                │                                  │                ▼
-                │                                  │              Step 14
-                │                                  │       interval/composition controls
-                │                                  │                │
-                │                                  │                ▼
-                │                                  │              Step 15
-                │                                  │      fixed-threshold domain sensitivity
-                │                                  │                │
-                │                                  │                ▼
-                │                                  │              Step 16
-                │                                  │       cross-threshold robustness
-                │                                  │
-                │                                  │
-                └─────────────── 02_pseudo_reference ───────────────┘
+                ^                          real vs pseudo       temporal scaling
+                |                             fluctuation           |
+                |                                  ^                |
+                |                                  |                v
+                |                                  |              Step 14
+                |                                  |       interval/composition controls
+                |                                  |                |
+                |                                  |                v
+                |                                  |              Step 15
+                |                                  |      fixed-threshold domain sensitivity
+                |                                  |                |
+                |                                  |                v
+                |                                  |              Step 16
+                |                                  |       cross-threshold robustness
+                |                                  |
+                |                                  |
+                `--------------- 02_pseudo_reference ---------------+
                               Steps 7–8 technical reference
 ```
 
@@ -209,21 +219,21 @@ A separate support-conditioned synthetic validation branch reuses the production
 
 ```text
 final empirical core/validation results
-              │
-              ▼
+              |
+              v
 freeze empirical calibration
-              │
-              ▼
+              |
+              v
 calibrate oracle accumulation doses
-              │
-              ▼
+              |
+              v
 generate R0p00 / R0p25 / R0p50 / R1p00
-              │
-              ▼
+              |
+              v
 for each scenario:
 Step 2 → Step 4 → Step 5 → Step 11 → Step 13
-              │
-              ▼
+              |
+              v
 verify → summarize → plot
 ```
 
@@ -247,25 +257,23 @@ Important consequences:
 
 # Analysis modules
 
-| Step | Canonical script | Block | Main role |
-|---|---|---|---|
-| 1 | `1-repertoire_characterization.py` | core | repertoire-level descriptive characterization and heavy-tail analysis |
-| 2 | `2-multirepresentation_clonotype_state_inference.py` | core | replicate-resolved latent/state inference and operational observability |
-| — | `noiseK_latent.py` | core dependency | count-noise / latent-state statistical engine used by Step 2 |
-| 3 | `3-latent_state_and_observation_model_diagnostics.py` | core diagnostic | posterior uncertainty, replicate agreement, and observation-model diagnostics |
-| 4 | `4-multirepresentation_trajectory_assembly.py` | core | longitudinal assembly of latent and observed replicate-resolved states |
-| 5 | `5-longitudinal_transition_assembly.py` | core | generic finite-time longitudinal transition table |
-| 6 | `6-transition_support_characterization.py` | core diagnostic | coverage, observation classes, and estimand-support characterization |
-| 7 | `7-pseudo_forward_technical_null_compact.py` | pseudo | pseudo technical null for replicate-decoupled forward structure |
-| 8 | `8-pseudo_fluctuation_conditioning_validation_pairbank.py` | pseudo | pseudo technical reference for replicate-consistent fluctuation covariance |
-| 9 | `9-observed_replicate_decoupled_forward_drift.py` | validation | genuine observed replicate-decoupled AB/BA forward dynamics |
-| 10 | `10-longitudinal_vs_pseudo_forward_null.py` | validation | genuine forward dynamics versus pseudo technical null |
-| 11 | `11-cross_replicate_fluctuation_dynamics.py` | validation | replicate-consistent longitudinal fluctuation covariance |
-| 12 | `12-longitudinal_vs_pseudo_cross_replicate_fluctuations.py` | validation | genuine cross-replicate covariance versus pseudo technical null |
-| 13 | `13-temporal_fluctuation_scaling.py` | validation | finite-lag temporal scaling on a fixed abundance core |
-| 14 | `14-interval_position_structure.py` | controls | calendar-position, anchoring, and subject-composition controls |
-| 15 | `15-detectability_boundary_sensitivity.py` | controls | fixed-threshold operational observation-domain sensitivity |
-| 16 | `16-analyze_observation_threshold_robustness.py` | controls | cross-threshold robustness of operational observation-domain conclusions |
+- **Step 1 — core:** `1-repertoire_characterization.py` — repertoire-level descriptive characterization and heavy-tail analysis.
+- **Step 2 — core:** `2-multirepresentation_clonotype_state_inference.py` — replicate-resolved latent/state inference and operational observability.
+- **Core dependency:** `noiseK_latent.py` — count-noise / latent-state statistical engine used by Step 2.
+- **Step 3 — core diagnostic:** `3-latent_state_and_observation_model_diagnostics.py` — posterior uncertainty, replicate agreement, and observation-model diagnostics.
+- **Step 4 — core:** `4-multirepresentation_trajectory_assembly.py` — longitudinal assembly of latent and observed replicate-resolved states.
+- **Step 5 — core:** `5-longitudinal_transition_assembly.py` — generic finite-time longitudinal transition table.
+- **Step 6 — core diagnostic:** `6-transition_support_characterization.py` — coverage, observation classes, and estimand-support characterization.
+- **Step 7 — pseudo:** `7-pseudo_forward_technical_null_compact.py` — pseudo technical null for replicate-decoupled forward structure.
+- **Step 8 — pseudo:** `8-pseudo_fluctuation_conditioning_validation_pairbank.py` — pseudo technical reference for replicate-consistent fluctuation covariance.
+- **Step 9 — validation:** `9-observed_replicate_decoupled_forward_drift.py` — genuine observed replicate-decoupled AB/BA forward dynamics.
+- **Step 10 — validation:** `10-longitudinal_vs_pseudo_forward_null.py` — genuine forward dynamics versus pseudo technical null.
+- **Step 11 — validation:** `11-cross_replicate_fluctuation_dynamics.py` — replicate-consistent longitudinal fluctuation covariance.
+- **Step 12 — validation:** `12-longitudinal_vs_pseudo_cross_replicate_fluctuations.py` — genuine cross-replicate covariance versus pseudo technical null.
+- **Step 13 — validation:** `13-temporal_fluctuation_scaling.py` — finite-lag temporal scaling on a fixed abundance core.
+- **Step 14 — controls:** `14-interval_position_structure.py` — calendar-position, anchoring, and subject-composition controls.
+- **Step 15 — controls:** `15-detectability_boundary_sensitivity.py` — fixed-threshold operational observation-domain sensitivity.
+- **Step 16 — controls:** `16-analyze_observation_threshold_robustness.py` — cross-threshold robustness of operational observation-domain conclusions.
 
 ---
 
@@ -277,19 +285,19 @@ At each subject–timepoint, paired technical replicates are modeled independent
 
 For latent clonotype frequency \(f\), replicate counts are modeled using an overdispersed count model of the form
 
-\[
+$$
 C_r \mid f,N_r,\kappa
 \sim
 \mathrm{NB}(\mu=fN_r,\mathrm{size}=\kappa),
-\]
+$$
 
 with
 
-\[
+$$
 \mathrm{Var}(C_r\mid f)
 =
 \mu+\frac{\mu^2}{\kappa}.
-\]
+$$
 
 Latent frequency is represented on a discrete log-frequency grid. Pair-specific parameters and clonotype-level posterior quantities are inferred from the technical-replicate pair.
 
@@ -357,11 +365,11 @@ support:
 
 The two folds are combined **after abundance binning** with exact equal weight:
 
-\[
+$$
 \mathrm{AB/BA\ combined}
 =
 0.5\,\mathrm{AB}+0.5\,\mathrm{BA}.
-\]
+$$
 
 No row-count weighting is used.
 
@@ -373,8 +381,8 @@ This geometry prevents the same observed replicate from simultaneously defining 
 
 The primary fluctuation estimand is
 
-\[
-\mathrm{cross\_cov}
+$$
+\mathrm{cross_cov}
 =
 \mathrm{Cov}
 \left(
@@ -385,7 +393,7 @@ x_{\mathrm{mid,latent}},
 \Delta t,
 \mathrm{common4}
 \right).
-\]
+$$
 
 where:
 
@@ -395,25 +403,25 @@ where:
 
 Complementary quantities are
 
-\[
-\mathrm{same\_var\_mean}
+$$
+\mathrm{same_var_mean}
 =
 \frac{
 \mathrm{Var}(\Delta x^{(1)}_{\mathrm{obs}})
 +
 \mathrm{Var}(\Delta x^{(2)}_{\mathrm{obs}})
 }{2},
-\]
+$$
 
 and
 
-\[
-\mathrm{replicate\_specific\_excess}
+$$
+\mathrm{replicate_specific_excess}
 =
-\mathrm{same\_var\_mean}
+\mathrm{same_var_mean}
 -
-\mathrm{cross\_cov}.
-\]
+\mathrm{cross_cov}.
+$$
 
 `cross_cov` is signed and is never clipped at zero.
 
@@ -444,13 +452,13 @@ primary estimator:
 
 The primary signed descriptor is
 
-\[
+$$
 M(\Delta t)
 =
 K
 +
 D(\Delta t-1),
-\]
+$$
 
 where \(D\) is the temporal slope per week.
 
@@ -492,9 +500,9 @@ The production ensemble contains:
 
 Twelve measurements define
 
-\[
+$$
 \binom{12}{2}=66
-\]
+$$
 
 unique unordered technical-replicate pairs.
 
@@ -923,33 +931,33 @@ the core writes directly into that root:
 
 ```text
 dataset_longitudinal_results/
-├── 00_orchestrator_config.json
-├── 00_orchestrator_step_manifest.csv
-├── logs/
-│   └── core/
-│
-├── 1-repertoire_characterization/
-├── 2-multirepresentation_clonotype_state_inference/
-├── 3-latent_state_and_observation_model_diagnostics/
-├── 4-multirepresentation_trajectory_assembly/
-├── 5-longitudinal_transition_assembly/
-└── 6-transition_support_characterization/
++-- 00_orchestrator_config.json
++-- 00_orchestrator_step_manifest.csv
++-- logs/
+|   `-- core/
+|
++-- 1-repertoire_characterization/
++-- 2-multirepresentation_clonotype_state_inference/
++-- 3-latent_state_and_observation_model_diagnostics/
++-- 4-multirepresentation_trajectory_assembly/
++-- 5-longitudinal_transition_assembly/
+`-- 6-transition_support_characterization/
 ```
 
 The validation and control blocks can add their outputs to the same root:
 
 ```text
 dataset_longitudinal_results/
-├── ...
-├── 9-observed_replicate_decoupled_forward_drift/
-├── 10-longitudinal_vs_pseudo_forward_null/
-├── 11-cross_replicate_fluctuation_dynamics/
-├── 12-longitudinal_vs_pseudo_cross_replicate_fluctuations/
-├── 13-temporal_fluctuation_scaling/
-├── 14-interval_position_structure/
-├── 15-detectability_boundary_sensitivity/
-├── 16-observation_threshold_robustness/
-└── positive_controls/
++-- ...
++-- 9-observed_replicate_decoupled_forward_drift/
++-- 10-longitudinal_vs_pseudo_forward_null/
++-- 11-cross_replicate_fluctuation_dynamics/
++-- 12-longitudinal_vs_pseudo_cross_replicate_fluctuations/
++-- 13-temporal_fluctuation_scaling/
++-- 14-interval_position_structure/
++-- 15-detectability_boundary_sensitivity/
++-- 16-observation_threshold_robustness/
+`-- positive_controls/
 ```
 
 No `alpha_*` subdirectory is created by the current core orchestrator.
@@ -962,24 +970,24 @@ A typical pseudo result root is:
 
 ```text
 dataset_pseudo_results/
-├── source_measurements.tsv
-├── pseudo_configurations.tsv
-├── pseudo_configurations_wide.tsv
-├── 00_pseudo_1x12_config.json
-│
-├── pair_bank_multirepresentation/
-│   ├── pair_bank_manifest.tsv
-│   ├── 00_pairbank_signature.json
-│   └── 2-clonotype_state_inference/
-│
-├── ensemble_results_v3/
-│   ├── C000001/step7_cache/step7_dt1.parquet
-│   ├── ...
-│   └── C002000/step7_cache/step7_dt1.parquet
-│
-├── 7-pseudo_forward_technical_null_compact/
-├── step8_transition_bank_v1/
-└── 8-pseudo_fluctuation_conditioning_validation_pairbank/
++-- source_measurements.tsv
++-- pseudo_configurations.tsv
++-- pseudo_configurations_wide.tsv
++-- 00_pseudo_1x12_config.json
+|
++-- pair_bank_multirepresentation/
+|   +-- pair_bank_manifest.tsv
+|   +-- 00_pairbank_signature.json
+|   `-- 2-clonotype_state_inference/
+|
++-- ensemble_results_v3/
+|   +-- C000001/step7_cache/step7_dt1.parquet
+|   +-- ...
+|   `-- C002000/step7_cache/step7_dt1.parquet
+|
++-- 7-pseudo_forward_technical_null_compact/
++-- step8_transition_bank_v1/
+`-- 8-pseudo_fluctuation_conditioning_validation_pairbank/
 ```
 
 The 2,000 configuration directories retain only the compact Step-7 cache after production cleanup.
@@ -1130,10 +1138,10 @@ A typical figure root is:
 
 ```text
 figures/
-├── 01_core/
-├── 02_pseudo_reference/
-├── 03_validation/
-└── 04_controls/
++-- 01_core/
++-- 02_pseudo_reference/
++-- 03_validation/
+`-- 04_controls/
 ```
 
 The controls block uses the integrated Steps-14–16 robustness plotter by default.
@@ -1325,7 +1333,7 @@ A `CITATION.cff` file should be included in the public repository once the final
 
 # Contact
 
-Camillo Palmieri
+Camillo Palmieri, PhD
+cpalmieri@unicz.it
 
 For questions about the software, reproducibility, or methodological implementation, please use the GitHub issue tracker or contact the corresponding author.
-
