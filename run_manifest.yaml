@@ -1,0 +1,52 @@
+project:
+  name: ClonoDynamics
+  repository: https://github.com/ClonoDynamics/clonodynamics-pipeline
+  branch: main
+  git_commit: 686a59717b0430ccd655fd42d542d5cd16a50546
+  release_tag: TODO
+
+environment:
+  python: "3.9.22"
+  numpy: "2.0.2"
+  pandas: "2.3.3"
+  scipy: "1.13.1"
+  matplotlib: "3.9.4"
+  polars: "1.36.1"
+  pyarrow: "21.0.0"
+
+mixcr:
+  version: "4.4.2"
+  repseq_io: "2.1.0"
+  milib: "3.1.0-7-Sparse-k-mer-index-in-kMapper2-for-long-reads"
+  builtin_library: "repseqio.v3.0.1"
+
+pseudo_reference:
+  source_biological_subjects: 1
+  source_measurements: 12
+  pseudo_timepoints_per_configuration: 6
+  replicates_per_pseudo_timepoint: 2
+  configurations: 2000
+  unique_unordered_pair_fits: 66
+  design_seed: 12345
+  analysis_seed: 123
+  source_manifest: source_measurements.tsv
+  configuration_manifest: pseudo_configurations.tsv
+  configuration_wide_manifest: pseudo_configurations_wide.tsv
+
+synthetic_validation:
+  simulation_seed: 20260918
+
+data:
+  ncbi_bioproject: PRJNA1457834
+  sra_study: SRP694925
+
+  longitudinal:
+    runs: 114
+
+  pseudo_reference:
+    runs: 12
+
+release:
+  software_doi: TODO
+  reproducibility_data_doi: TODO
+  biorxiv_doi: TODO
