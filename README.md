@@ -1361,7 +1361,9 @@ A `CITATION.cff` file should be included in the public repository once the final
 
 # Contact
 
-Camillo Palmieri, PhD
+Prof. Camillo Palmieri, PhD
+Full Professor of Clinical Biochemistry
+University Magna Grecia of Catanzaro, Italy.
 cpalmieri@unicz.it
 
 For questions about the software, reproducibility, or methodological implementation, please use the GitHub issue tracker or contact the corresponding author.
