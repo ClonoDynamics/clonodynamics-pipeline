@@ -47,6 +47,6 @@ data:
     runs: 12
 
 release:
-  software_doi: TODO
+  software_doi: 10.5281/zenodo.22925873
   reproducibility_data_doi: 10.5281/zenodo.22925114
   biorxiv_doi: TODO
