@@ -52,33 +52,69 @@ The framework does **not** require a predefined stochastic differential equation
 
 ---
 
-## Documentation
+# Documentation
 
-Detailed scientific documentation is available in
-[`docs/methods/`](docs/methods/README.md):
+The root `README.md` provides the conceptual overview, repository structure, and execution entry points for ClonoDynamics. Detailed scientific and computational methods are maintained under:
 
-- [Primary analysis: Steps 1–13](docs/methods/01_primary_analysis.md)
-- [Synthetic positive controls](docs/methods/02_positive_controls.md)
-- [Robustness controls: Steps 14–16](docs/methods/03_robustness_controls.md)
+```text
+docs/methods/
+```
 
+The methods documentation is organized into three complementary documents:
+
+1. **[Primary analysis: Steps 1–13](docs/methods/01_primary_analysis.md)**  
+   Repertoire characterization, paired-replicate state inference, multirepresentation trajectory and transition construction, pseudo-longitudinal technical calibration, observed replicate-decoupled forward dynamics, cross-replicate fluctuation dynamics, longitudinal-versus-pseudo comparisons, and temporal scaling.
+
+2. **[Synthetic positive controls](docs/methods/02_positive_controls.md)**  
+   Support-conditioned semi-synthetic validation, frozen empirical calibration, oracle dose construction, synthetic repertoire generation, recovery through the production pipeline, verification, and recovery summaries.
+
+3. **[Robustness and sensitivity controls: Steps 14–16](docs/methods/03_robustness_controls.md)**  
+   Calendar-position and interval-composition controls, fixed-threshold operational observation-domain sensitivity, and numerical observation-threshold robustness.
+
+A compact index is available at **[`docs/methods/README.md`](docs/methods/README.md)**.
+
+## Documentation and manuscript versioning
+
+The files under `docs/methods/` are the **living scientific documentation** of the current ClonoDynamics software. They may evolve when repository paths, orchestration, implementation details, or explanatory text are improved.
+
+The exact methods corresponding to a submitted or published manuscript should instead be frozen together with the matching software version using a tagged release, for example:
+
+```text
+v1.0.0-paper
+```
+
+This separation allows the public repository to remain maintainable while preserving an immutable software-and-methods record for the reported study.
+
+
+---
 
 # Repository architecture
 
-The public repository is organized into five computational blocks.
+The public repository is organized into five computational blocks plus a dedicated scientific-documentation layer.
 
 ```text
-code/
+ClonoDynamics/
 |
-+-- orchestrator_clonodynamics.py
++-- README.md
 |
-+-- 01_core/
-+-- 02_pseudo_reference/
-+-- 03_validation/
-+-- 04_controls/
-`-- 05_plotting/
++-- code/
+|   +-- orchestrator_clonodynamics.py
+|   |
+|   +-- 01_core/
+|   +-- 02_pseudo_reference/
+|   +-- 03_validation/
+|   +-- 04_controls/
+|   `-- 05_plotting/
+|
+`-- docs/
+    `-- methods/
+        +-- README.md
+        +-- 01_primary_analysis.md
+        +-- 02_positive_controls.md
+        `-- 03_robustness_controls.md
 ```
 
-The master orchestrator is the only orchestration file required under `code/`.
+The master orchestrator is the only orchestration file required directly under `code/`. The `docs/methods/` directory provides the extended scientific documentation of the corresponding analysis blocks.
 
 ## 01_core
 
@@ -1151,6 +1187,9 @@ The individual detailed Step-14/15/16 plotters are optional and are not part of 
 ---
 
 # Reproducibility and provenance
+
+The scientific definitions, estimands, support rules, and block-specific computational procedures are documented in [`docs/methods/`](docs/methods/README.md). Reproducibility therefore relies on the combination of **code + recorded provenance + matching methods documentation**, rather than on script names alone.
+
 
 ClonoDynamics is designed around explicit intermediate states and dependency-aware reruns.
 
