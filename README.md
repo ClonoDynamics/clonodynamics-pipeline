@@ -357,9 +357,7 @@ $$
 with
 
 $$
-\mathrm{Var}(C_r\mid f)
-=
-\mu+\frac{\mu^2}{\kappa}.
+\mathrm{Var}(C_r\mid f) = \mu+\frac{\mu^2}{\kappa}.
 $$
 
 Latent frequency is represented on a discrete log-frequency grid. Pair-specific parameters and clonotype-level posterior quantities are inferred from the technical-replicate pair.
@@ -429,9 +427,7 @@ support:
 The two folds are combined **after abundance binning** with exact equal weight:
 
 $$
-\mathrm{AB/BA\ combined}
-=
-0.5\,\mathrm{AB}+0.5\,\mathrm{BA}.
+\mathrm{AB/BA\ combined} = 0.5\,\mathrm{AB}+0.5\,\mathrm{BA}.
 $$
 
 No row-count weighting is used.
@@ -445,8 +441,7 @@ This geometry prevents the same observed replicate from simultaneously defining 
 The primary fluctuation estimand is:
 
 $$
-V_{\mathrm{cross}}
-=
+V_{\mathrm{cross}} =
 \mathrm{Cov}\left(
 \Delta x^{(1)}_{\mathrm{obs}},
 \Delta x^{(2)}_{\mathrm{obs}}
@@ -468,8 +463,7 @@ The corresponding code-level quantity is `cross_cov`.
 The mean within-replicate variance, stored as `same_var_mean`, is:
 
 $$
-V_{\mathrm{same}}
-=
+V_{\mathrm{same}} =
 \frac{
 \mathrm{Var}\left(\Delta x^{(1)}_{\mathrm{obs}}\right)
 +
@@ -480,8 +474,7 @@ $$
 The replicate-specific excess, stored as `replicate_specific_excess`, is:
 
 $$
-V_{\mathrm{excess}}
-=
+V_{\mathrm{excess}} =
 V_{\mathrm{same}}-V_{\mathrm{cross}}.
 $$
 
