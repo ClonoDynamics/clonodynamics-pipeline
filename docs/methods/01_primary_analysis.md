@@ -19,9 +19,9 @@ Current code mapping:
 
 [Back to the ClonoDynamics README](../../README.md)
 
----
 
-## Table of contents
+## Table of contents {#toc}
+
 1. [(i) Repertoire characterization and latent-state inference from paired technical replicates](#method-i)
    - [Observed repertoire preprocessing and heavy-tail characterization](#i-observed-repertoire-preprocessing-and-heavy-tail-characterization)
    - [Pairing of technical replicates and replicate-resolved observed measurements](#i-pairing-of-technical-replicates-and-replicate-resolved-observed-measurements)
@@ -38,7 +38,7 @@ Current code mapping:
    - [Full-posterior endpoint uncertainty propagation](#ii-full-posterior-endpoint-uncertainty-propagation)
    - [Transition-universe and estimand-support characterization](#ii-transition-universe-and-estimand-support-characterization)
 3. [(iii) Pseudo-longitudinal technical calibration and definition of the primary estimators](#method-iii)
-   - [Pseudo-longitudinal technical-null ensemble and inferential unit](#iii-pseudo-longitudinal-technical-null-ensemble-and-inferential-unit)
+   - [Pseudo-longitudinal technical-reference ensemble and inferential unit](#iii-pseudo-longitudinal-technical-null-ensemble-and-inferential-unit)
    - [Mathematical coupling and rationale for replicate decoupling](#iii-mathematical-coupling-and-rationale-for-replicate-decoupling)
    - [Step-7 primary observed replicate-decoupled forward benchmark](#iii-step-7-primary-observed-replicate-decoupled-forward-benchmark)
    - [Matched same-versus-cross coupling control](#iii-matched-same-versus-cross-coupling-control)
@@ -50,20 +50,20 @@ Current code mapping:
    - [Abundance binning and fold combination](#iv-abundance-binning-and-fold-combination)
    - [Subject-level uncertainty and curve descriptors](#iv-subject-level-uncertainty-and-curve-descriptors)
    - [Matched same-measure control](#iv-matched-same-measure-control)
-   - [Reference to the pseudo-longitudinal technical null](#iv-reference-to-the-pseudo-longitudinal-technical-null)
-5. [(v) Replicate-resolved fluctuation dynamics, technical-null reference and temporal scaling](#method-v)
+   - [Reference to the pseudo-longitudinal technical reference](#iv-reference-to-the-pseudo-longitudinal-technical-null)
+5. [(v) Replicate-resolved fluctuation dynamics, technical-reference comparison and temporal scaling](#method-v)
    - [Cross-replicate fluctuation estimand](#v-cross-replicate-fluctuation-estimand)
    - [Abundance grid, lag-resolved profiles and uncertainty](#v-abundance-grid-lag-resolved-profiles-and-uncertainty)
-   - [Reference to the pseudo-longitudinal technical null](#v-reference-to-the-pseudo-longitudinal-technical-null)
+   - [Reference to the pseudo-longitudinal technical reference](#v-reference-to-the-pseudo-longitudinal-technical-null)
    - [Fixed-core temporal scaling across 1–5 weeks](#v-fixed-core-temporal-scaling-across-1-5-weeks)
    - [Primary temporal estimator and sensitivity weighting](#v-primary-temporal-estimator-and-sensitivity-weighting)
    - [Signed temporal slope, bootstrap inference and finite-lag models](#v-signed-temporal-slope-bootstrap-inference-and-finite-lag-models)
 
-<a id="method-i"></a>
-## (i) Repertoire characterization and latent-state inference from paired technical replicates
-<a id="i-observed-repertoire-preprocessing-and-heavy-tail-characterization"></a>
-### Observed repertoire preprocessing and heavy-tail characterization
-Observed repertoire architecture was characterized using `code/01_core/1-repertoire_characterization.py`. Each technical replicate was analyzed independently. Read counts were converted to numeric values, non-finite and non-positive entries were discarded, and rows sharing the same CDR3 amino-acid sequence (`aaSeqCDR3`) were collapsed by summing their read counts. The input `readFraction` field, when present, was not used. For a repertoire with clonotype counts $c_i$, sequencing depth was
+## (i) Repertoire characterization and latent-state inference from paired technical replicates {#method-i}
+
+### Observed repertoire preprocessing and heavy-tail characterization {#i-observed-repertoire-preprocessing-and-heavy-tail-characterization}
+
+Observed repertoire architecture was characterized using `1-repertoire_characterization.py`. Each technical replicate was analyzed independently. Read counts were converted to numeric values, non-finite and non-positive entries were discarded, and rows sharing the same CDR3 amino-acid sequence (`aaSeqCDR3`) were collapsed by summing their read counts. The input `readFraction` field, when present, was not used. For a repertoire with clonotype counts $c_i$, sequencing depth was
 
 $$
 D=\sum_i c_i,
@@ -77,7 +77,7 @@ $$
 
 The number of distinct amino-acid CDR3 sequences after collapsing defined observed repertoire richness.
 
-The high-frequency tail was first characterized using a continuous Pareto model,
+The high-frequency tail was first characterized using a continuous Pareto model, following established heavy-tail fitting approaches and prior descriptions of heavy-tailed TCR clone-size distributions (Clauset et al., 2009; Desponds et al., 2016; Koch et al., 2018),
 
 $$
 p(f\mid f_{\min},\gamma)=(\gamma-1)f_{\min}^{\gamma-1}f^{-\gamma}, \qquad f\ge f_{\min},\ \gamma>1.
@@ -117,9 +117,9 @@ with BIC retained as a sensitivity criterion.
 
 This repertoire-level analysis was descriptive. Sequencing depth, repertoire richness, Pareto fit success, fitted exponent, KS distance, tail fraction, and Pareto-versus-truncated-log-normal preference were not used as upstream exclusion criteria. In particular, the Step-1 Pareto exponent was neither passed to nor used to constrain the latent model.
 
-<a id="i-pairing-of-technical-replicates-and-replicate-resolved-observed-measurements"></a>
-### Pairing of technical replicates and replicate-resolved observed measurements
-Latent-state inference and construction of the multirepresentation clonotype-state table were implemented in `code/01_core/2-multirepresentation_clonotype_state_inference.py`, which calls `code/01_core/noiseK_latent.py` for latent-frequency inference. Only complete subject-timepoint replicate pairs were fitted. Within each replicate, duplicate `aaSeqCDR3` entries were collapsed by summing read counts. Replicates were then outer-joined by CDR3 amino-acid sequence. Consequently, every clonotype detected in at least one replicate was represented, whereas a clonotype not detected in the other replicate received an observed count of zero. A $(0,0)$ row was not generated because the table was defined on the union of detected clonotypes.
+### Pairing of technical replicates and replicate-resolved observed measurements {#i-pairing-of-technical-replicates-and-replicate-resolved-observed-measurements}
+
+Latent-state inference and construction of the multirepresentation clonotype-state table were implemented in `2-multirepresentation_clonotype_state_inference.py`, which calls `noiseK_latent.py` for latent-frequency inference. Only complete subject-timepoint replicate pairs were fitted. Within each replicate, duplicate `aaSeqCDR3` entries were collapsed by summing read counts. Replicates were then outer-joined by CDR3 amino-acid sequence. Consequently, every clonotype detected in at least one replicate was represented, whereas a clonotype not detected in the other replicate received an observed count of zero. A $(0,0)$ row was not generated because the table was defined on the union of detected clonotypes.
 
 For replicate $r$, sequencing depth was
 
@@ -141,8 +141,8 @@ $$
 
 When $c_{ir}=0$, the corresponding observed log-frequency was left undefined rather than assigned an arbitrary finite pseudocount value. These replicate-resolved measurements were preserved because their independence is required by the downstream replicate-decoupled forward and cross-replicate fluctuation estimators.
 
-<a id="i-pair-specific-negative-binomial-latent-model"></a>
-### Pair-specific Negative-Binomial latent model
+### Pair-specific Negative-Binomial latent model {#i-pair-specific-negative-binomial-latent-model}
+
 For clonotype $i$, the two technical-replicate counts were assumed conditionally independent given a shared latent relative frequency $f_i$:
 
 $$
@@ -159,7 +159,7 @@ $$
 \mathrm{Var}(C_{ir}\mid f_i)=N_r f_i+\frac{(N_r f_i)^2}{\kappa}.
 $$
 
-Thus, $\kappa$ captures technical overdispersion beyond Poisson sampling. A zero count is a valid Negative-Binomial observation and contributes to the likelihood without implying $f_i=0$.
+Thus, $\kappa$ captures technical overdispersion beyond Poisson sampling, consistent with replicate-based repertoire measurement models in which true clonotype frequency is latent and read-count variability is explicitly overdispersed (Puelma Touzel et al., 2020). A zero count is a valid Negative-Binomial observation and contributes to the likelihood without implying $f_i=0$.
 
 Latent frequencies were evaluated on a logarithmically spaced grid $\{f_1,\ldots,f_G\}$ with $G=500$ and $f_{\max}=1$. Unless otherwise specified, the lower limit was
 
@@ -167,7 +167,7 @@ $$
 f_{\min}=\frac{1}{\max\left[(N_1+N_2)/2,1\right]}.
 $$
 
-The prior implemented in `code/01_core/noiseK_latent.py` is a normalized discrete probability mass over this grid,
+The prior implemented in `noiseK_latent.py` is a normalized discrete probability mass over this grid,
 
 $$
 \pi_j(\gamma)=\frac{f_j^{-\gamma}}{\sum_{k=1}^{G}f_k^{-\gamma}}.
@@ -189,8 +189,8 @@ $$
 
 Optimization was performed with L-BFGS-B using starting values $\gamma=1.6$ and $\kappa=50$ and numerical lower bounds of $10^{-6}$ for both parameters. Marginal likelihood calculations were evaluated in clonotype chunks, with a default chunk size of 20,000, to limit peak memory use without altering the fitted objective.
 
-<a id="i-joint-and-single-replicate-latent-posteriors"></a>
-### Joint and single-replicate latent posteriors
+### Joint and single-replicate latent posteriors {#i-joint-and-single-replicate-latent-posteriors}
+
 After pair-specific parameter estimation, the joint posterior for each clonotype was
 
 $$
@@ -221,8 +221,8 @@ $$
 
 whereas for a clonotype detected in only one replicate the observed frequency of that positive replicate was used. This auxiliary quantity is not the primary fluctuation displacement in the final analysis.
 
-<a id="i-realized-detection-and-posterior-predictive-detectability"></a>
-### Realized detection and posterior-predictive detectability
+### Realized detection and posterior-predictive detectability {#i-realized-detection-and-posterior-predictive-detectability}
+
 Realized technical detection was recorded separately for each replicate as $c_{ir}>0$. These indicators describe sequencing outcomes and were not interpreted as biological presence or absence.
 
 Model-based posterior-predictive detectability was calculated under the fitted Negative-Binomial observation model. With the default detection threshold of one read, the conditional dropout probability in replicate $r$ is
@@ -249,10 +249,10 @@ $$
 p_{\mathrm{detect,state}}=1-p_{\mathrm{drop,state}}.
 $$
 
-Because both replicate predictions are integrated over the same uncertain latent frequency, paired-state detectability is not generally identical to a product constructed from separately posterior-averaged replicate detectabilities. These quantities are model-based technical detectability measures and were not treated as independently calibrated probabilities of biological presence.
+Because both replicate predictions are integrated over the same uncertain latent frequency, paired-state detectability is not generally identical to a product constructed from separately posterior-averaged replicate detectabilities. These quantities are model-based technical detectability measures and were not treated as independently calibrated probabilities of biological presence. Their use as model diagnostics follows the broader posterior-predictive model-checking framework (Gelman et al., 1996).
 
-<a id="i-operational-observability-and-inclusion-policy"></a>
-### Operational observability and inclusion policy
+### Operational observability and inclusion policy {#i-operational-observability-and-inclusion-policy}
+
 Operational observability was defined separately from posterior-predictive detectability. For each clonotype, the fitted model provides the marginal log probability of the observed replicate count pair,
 
 $$
@@ -275,19 +275,19 @@ with $\alpha=0.05$ in the reference analysis. This annotation subsequently defin
 
 All complete replicate pairs were submitted to latent inference without upstream quality-based exclusion. Posterior width, entropy, replicate agreement, depth imbalance, ONE_POSITIVE/TWO_POSITIVE status, and posterior-predictive detectability were retained as diagnostics only and were not used to filter successfully fitted states. Numerical optimizer failure was treated differently because it does not yield a valid fitted latent model: unsuccessful pair fits were documented but were not admitted to the canonical aggregated state table. Downstream inclusion therefore depended on successful numerical inference, not on cohort-relative QC thresholds.
 
-<a id="i-code-implementation"></a>
-### Code implementation
+### Code implementation {#i-code-implementation}
+
 The analyses described in this section correspond to the following production scripts:
 
-- `code/01_core/1-repertoire_characterization.py`: repertoire preprocessing, descriptive Pareto-tail fitting, and Pareto-versus-lower-truncated-log-normal robustness analysis.
-- `code/01_core/2-multirepresentation_clonotype_state_inference.py`: technical-replicate pairing, construction of replicate-resolved observed measurements, pair-specific latent fitting, state-table aggregation, and operational observability.
-- `code/01_core/noiseK_latent.py`: Negative-Binomial latent-frequency model, pair-specific empirical-Bayes estimation of $\gamma$ and $\kappa$, joint and single-replicate posteriors, posterior uncertainty summaries, and posterior-predictive detectability.
+- `1-repertoire_characterization.py`: repertoire preprocessing, descriptive Pareto-tail fitting, and Pareto-versus-lower-truncated-log-normal robustness analysis.
+- `2-multirepresentation_clonotype_state_inference.py`: technical-replicate pairing, construction of replicate-resolved observed measurements, pair-specific latent fitting, state-table aggregation, and operational observability.
+- `noiseK_latent.py`: Negative-Binomial latent-frequency model, pair-specific empirical-Bayes estimation of $\gamma$ and $\kappa$, joint and single-replicate posteriors, posterior uncertainty summaries, and posterior-predictive detectability.
 
-<a id="method-ii"></a>
-## (ii) Assembly and characterization of the longitudinal transition dataset
-<a id="ii-standardized-multirepresentation-trajectory-assembly"></a>
-### Standardized multirepresentation trajectory assembly
-Longitudinal trajectory construction was implemented in `code/01_core/4-multirepresentation_trajectory_assembly.py` (Step 4). Its canonical input was the combined Step-2 clonotype-state table. The production state key was
+## (ii) Assembly and characterization of the longitudinal transition dataset {#method-ii}
+
+### Standardized multirepresentation trajectory assembly {#ii-standardized-multirepresentation-trajectory-assembly}
+
+Longitudinal trajectory construction was implemented in `4-multirepresentation_trajectory_assembly.py` (Step 4), in the general tradition of cross-sample clonotype tracking in repertoire-sequencing studies (Shugay et al., 2015; Pogorelyy et al., 2018; Minervina et al., 2020). Its canonical input was the combined Step-2 clonotype-state table. The production state key was
 
 $$
 \text{subject}\times\text{aaSeqCDR3}\times\text{time},
@@ -329,9 +329,9 @@ with $\alpha_{\mathrm{ref}}=0.05$ in the reference analysis. Upstream and recons
 
 Step 4 was strictly an assembly layer. It did not refit the observation model, alter posterior estimates, estimate dynamics, or remove states according to abundance, posterior width, posterior entropy, replicate agreement, realized positivity class, posterior-predictive detectability, `p_value`, or operational observability. Instead, malformed identifiers, negative counts, non-positive sequencing depths, invalid latent states, out-of-range probabilities, or duplicate state keys generated explicit errors.
 
-<a id="ii-generic-finite-time-transition-assembly"></a>
-### Generic finite-time transition assembly
-Finite-time transitions were assembled with `code/01_core/5-longitudinal_transition_assembly.py` (Step 5). For each subject, and separately within any explicit extra grouping variables, all available time pairs $t_0<t_1$ satisfying
+### Generic finite-time transition assembly {#ii-generic-finite-time-transition-assembly}
+
+Finite-time transitions were assembled with `5-longitudinal_transition_assembly.py` (Step 5). For each subject, and separately within any explicit extra grouping variables, all available time pairs $t_0<t_1$ satisfying
 
 $$
 1\le t_1-t_0\le5
@@ -384,8 +384,8 @@ $$
 
 These quantities were model-based conditioning or sensitivity representations rather than estimand-specific filters.
 
-<a id="ii-replicate-resolved-observed-transition-layer-and-estimand-support"></a>
-### Replicate-resolved observed transition layer and estimand support
+### Replicate-resolved observed transition layer and estimand support {#ii-replicate-resolved-observed-transition-layer-and-estimand-support}
+
 Observed replicate-specific endpoint measurements were retained as counts, sequencing depths, relative frequencies, and log-frequencies at $t_0$ and $t_1$. For replicate $r$,
 
 $$
@@ -438,8 +438,8 @@ $$
 
 These flags encoded measurement eligibility only. They were not quality scores and were not used during Step 5 to remove transitions.
 
-<a id="ii-operational-endpoint-annotation-within-the-unrestricted-transition-universe"></a>
-### Operational endpoint annotation within the unrestricted transition universe
+### Operational endpoint annotation within the unrestricted transition universe {#ii-operational-endpoint-annotation-within-the-unrestricted-transition-universe}
+
 Step 5 retained the continuous empirical observation statistic at both endpoints, `p_value_t0` and `p_value_t1`, together with the reference operational-observability indicators. Reference endpoint labels were defined by
 
 $$
@@ -450,8 +450,8 @@ $$
 
 and combined into the four reference classes TT, TF, FT, and FF. These labels describe operational endpoint observability at the specified threshold and were not interpreted as biological persistence, expansion, contraction, extinction, or absence. No observation-class filtering was performed during transition assembly. Preserving the continuous endpoint `p_value` fields allowed downstream sensitivity analyses to reconstruct the operational domain at alternative $\alpha$ values on exactly the same transition universe.
 
-<a id="ii-full-posterior-endpoint-uncertainty-propagation"></a>
-### Full-posterior endpoint uncertainty propagation
+### Full-posterior endpoint uncertainty propagation {#ii-full-posterior-endpoint-uncertainty-propagation}
+
 Step 5 supports an additional model-based uncertainty layer based on the complete discrete latent posterior caches generated upstream. In the production analysis in which this layer was requested, each endpoint posterior was sampled independently. For transition $t_0\rightarrow t_1$ and $M=1000$ Monte Carlo draws,
 
 $$
@@ -482,9 +482,9 @@ $$
 
 and analogously for $P(\Delta x<0\mid\mathrm{data})$. Endpoint posterior draws were independent conditional on their separately fitted time-point models. The propagated displacement distribution therefore reflects marginal endpoint uncertainty and does not estimate cross-time posterior covariance from a joint longitudinal model. Full-posterior propagation was an optional uncertainty representation; it was not required to construct the primary replicate-decoupled forward estimator or the primary cross-replicate fluctuation estimator.
 
-<a id="ii-transition-universe-and-estimand-support-characterization"></a>
-### Transition-universe and estimand-support characterization
-The assembled transition table was characterized and audited with `code/01_core/6-transition_support_characterization.py` (Step 6). This step did not estimate longitudinal dynamics. Instead, it quantified the generic transition universe and tested whether the fields required by the downstream estimands were structurally available on their intended support.
+### Transition-universe and estimand-support characterization {#ii-transition-universe-and-estimand-support-characterization}
+
+The assembled transition table was characterized and audited with `6-transition_support_characterization.py` (Step 6). This step did not estimate longitudinal dynamics. Instead, it quantified the generic transition universe and tested whether the fields required by the downstream estimands were structurally available on their intended support.
 
 Coverage was summarized overall and by biological subject, subject-specific temporal interval, nominal $t_0\rightarrow t_1$ interval, and temporal lag $\Delta t$. The composition of the reference TT/TF/FT/FF classes and the fractions of transitions satisfying AB, BA, and `common4` eligibility were also reported. When additional pseudo/null grouping variables were present, these extended the analysis-unit keys but were not counted as additional biological subjects.
 
@@ -500,19 +500,19 @@ agreement between read-positivity flags and observed counts, agreement of AB/BA/
 
 All Step-6 checks were descriptive production-readiness audits. They did not change transition membership, select TT as a quality class, impose abundance or posterior-quality thresholds, or estimate forward drift, fluctuation covariance, temporal scaling, or observation-threshold effects. The final Step-5 transition table therefore remained the common finite-time substrate for the subsequent estimand-specific analyses.
 
-<a id="method-iii"></a>
-## (iii) Pseudo-longitudinal technical calibration and definition of the primary estimators
-<a id="iii-pseudo-longitudinal-technical-null-ensemble-and-inferential-unit"></a>
-### Pseudo-longitudinal technical-null ensemble and inferential unit
-Technical calibration used the pseudo 1×12 dataset and was implemented in two production analyzers: `code/02_pseudo_reference/7-pseudo_forward_technical_null_compact.py` (Step 7) and `code/02_pseudo_reference/8-pseudo_fluctuation_conditioning_validation_pairbank.py` (Step 8). The source dataset contained one unchanged biological source represented by 12 independent technical TCR-repertoire measurements. These measurements were reassembled upstream into 2,000 randomized configurations, each organized as six pseudo-time points with two technical replicates per pseudo-time point.
+## (iii) Pseudo-longitudinal technical calibration and definition of the primary estimators {#method-iii}
+
+### Pseudo-longitudinal technical-reference ensemble and inferential unit {#iii-pseudo-longitudinal-technical-null-ensemble-and-inferential-unit}
+
+Technical calibration used the pseudo 1×12 dataset and was implemented in two production analyzers, motivated by the established need to quantify technical variability and standardize AIRR-seq measurements using replicate or control material (Barennes et al., 2021; Trück et al., 2021): `7-pseudo_forward_technical_null_compact.py` (Step 7) and `8-pseudo_fluctuation_conditioning_validation_pairbank.py` (Step 8). The source dataset contained one unchanged biological source represented by 12 independent technical TCR-repertoire measurements. These measurements were reassembled upstream into 2,000 randomized configurations, each organized as six pseudo-time points with two technical replicates per pseudo-time point.
 
 The randomization unit and the biological unit were explicitly distinguished. `configuration_id` identifies a randomized reassembly of the same 12 technical measurements and was never treated as an additional biological subject. Consequently, no subject bootstrap was performed. Across-configuration medians and 2.5th–97.5th percentiles describe the distribution induced by pseudo-longitudinal randomization and were reported as randomization intervals rather than biological confidence intervals. Likewise, pseudo-lag $\Delta t$ represents distance within an arbitrary technical ordering and must not be interpreted as elapsed biological time.
 
-Step 7 used the one-step compact transition cache ($\Delta t=1$) for forward technical-null calibration. Step 8 evaluated fluctuation behavior over pseudo-lags $\Delta t\in\{1,2,3,4,5\}$. Neither analyzer counted configurations as biological replicates.
+Step 7 used the one-step compact transition cache ($\Delta t=1$) for forward technical-reference calibration. Step 8 evaluated fluctuation behavior over pseudo-lags $\Delta t\in\{1,2,3,4,5\}$. Neither analyzer counted configurations as biological replicates.
 
-<a id="iii-mathematical-coupling-and-rationale-for-replicate-decoupling"></a>
-### Mathematical coupling and rationale for replicate decoupling
-The forward calibration explicitly addressed the algebraic coupling created when the same noisy baseline measurement appears both on the horizontal axis and inside the displacement. Consider an unchanged underlying log-abundance $x^*$ observed with measurement error,
+### Mathematical coupling and rationale for replicate decoupling {#iii-mathematical-coupling-and-rationale-for-replicate-decoupling}
+
+The forward calibration explicitly addressed the algebraic coupling created when the same noisy baseline measurement appears both on the horizontal axis and inside the displacement, a classical source of spurious baseline–change association in repeated-measurement analyses (Oldham, 1962; Chiolero et al., 2013). Consider an unchanged underlying log-abundance $x^*$ observed with measurement error,
 
 $$
 y_{r,t}=x^*+\varepsilon_{r,t}.
@@ -555,8 +555,8 @@ $$
 
 These relations motivated the matched same-versus-cross calibration but were not imposed as fitting constraints. Residual deviations from the ideal null were treated empirically as the combined consequence of finite sampling, technical measurement, state representation, binning, and arbitrary pseudo-time assignment.
 
-<a id="iii-step-7-primary-observed-replicate-decoupled-forward-benchmark"></a>
-### Step-7 primary observed replicate-decoupled forward benchmark
+### Step-7 primary observed replicate-decoupled forward benchmark {#iii-step-7-primary-observed-replicate-decoupled-forward-benchmark}
+
 The production Step-7 compact cache retained the quantities required for the final forward estimator: $x_0^{\mathrm{latent}}$, $x_{\mathrm{mid}}^{\mathrm{latent}}$, $x_{\star}^{\mathrm{latent}}$, $\Delta x^{\mathrm{latent}}$, replicate-specific observed initial log-frequencies, replicate-specific observed displacements, and the `forward_ab_eligible`, `forward_ba_eligible`, and `common4` support flags.
 
 The primary forward benchmark used the observed replicate-resolved channel. For configuration $c$ and abundance bin $b$, the AB fold was
@@ -611,8 +611,8 @@ $$
 
 and the linear slope, intercept, and zero crossing of mean displacement against bin center. AB–BA concordance was summarized across matched valid bins using Pearson correlation and absolute fold differences.
 
-<a id="iii-matched-same-versus-cross-coupling-control"></a>
-### Matched same-versus-cross coupling control
+### Matched same-versus-cross coupling control {#iii-matched-same-versus-cross-coupling-control}
+
 To isolate the effect of replicate decoupling from differences in measurement support, a matched comparison was performed on `common4`, for which both technical replicates were positive at both endpoints. Four curves were constructed on the same global forward bins:
 
 $$
@@ -665,8 +665,8 @@ $$
 
 Step 7 additionally recorded the fraction of the same-measure mean absolute bin displacement retained after cross-replicate decoupling and the corresponding change in abundance-dependent slope. These quantities were calibration descriptors rather than hypothesis-test statistics.
 
-<a id="iii-secondary-latent-conditioning-geometry-diagnostic"></a>
-### Secondary latent conditioning-geometry diagnostic
+### Secondary latent conditioning-geometry diagnostic {#iii-secondary-latent-conditioning-geometry-diagnostic}
+
 The compact Step-7 cache also supported a secondary comparison of the latent conditioning coordinates
 
 $$
@@ -679,9 +679,9 @@ against the same latent displacement $\Delta x^{\mathrm{latent}}$. Only rows fin
 
 This block was explicitly descriptive. It did not select a universal conditioning coordinate and, in the current compact workflow, it was not restricted to TT or any other operational observation class because `obs_class_reference` is not part of the compact input contract. The latent conditioning diagnostic therefore should not be described as the historical TT-only benchmark.
 
-<a id="iii-step-8-replicate-consistent-fluctuation-calibration"></a>
-### Step-8 replicate-consistent fluctuation calibration
-Fluctuation calibration used `code/02_pseudo_reference/8-pseudo_fluctuation_conditioning_validation_pairbank.py` and was restricted to `common4`, ensuring that both observed replicate displacements were finite at both endpoints. For a given configuration, pseudo-lag, and abundance bin, let
+### Step-8 replicate-consistent fluctuation calibration {#iii-step-8-replicate-consistent-fluctuation-calibration}
+
+Fluctuation calibration used `8-pseudo_fluctuation_conditioning_validation_pairbank.py` and was restricted to `common4`, ensuring that both observed replicate displacements were finite at both endpoints. For a given configuration, pseudo-lag, and abundance bin, let
 
 $$
 A=\Delta x_1^{\mathrm{obs}},
@@ -713,7 +713,7 @@ V_{\mathrm{rep}}
 =V_{\mathrm{same}}-C_{\mathrm{cross}}.
 $$
 
-When $V_{\mathrm{same}}>0$, the auxiliary shared-fraction descriptor was
+When $V_{\mathrm{same}}>0$, the auxiliary shared-fluctuation ratio was
 
 $$
 F_{\mathrm{shared}}
@@ -738,8 +738,8 @@ For the primary and sensitivity coordinates, binned covariance calculations used
 
 Step 8 summarized $C_{\mathrm{cross}}$, $V_{\mathrm{same}}$, and $V_{\mathrm{rep}}$ both by pseudo-lag and by abundance bin. To reduce dependence on unequal numbers of nominal intervals contributing to different pseudo-lags, equal-interval summaries were also calculated by first estimating the fluctuation quantity within each nominal interval and then averaging across valid intervals. Linear slopes across pseudo-lags 1–5 were retained as technical-randomization diagnostics only; pseudo-lag has no biological time interpretation.
 
-<a id="iii-randomization-summaries-and-final-estimator-policy"></a>
-### Randomization summaries and final estimator policy
+### Randomization summaries and final estimator policy {#iii-randomization-summaries-and-final-estimator-policy}
+
 Step-7 and Step-8 quantities were first computed separately within each of the 2,000 randomized configurations. Ensemble summaries were then obtained from the across-configuration distribution, using the configuration median together with the 2.5th and 97.5th randomization percentiles. No subject bootstrap and no nested pseudo-time permutation were applied by these analyzers.
 
 The technical calibration defined the production estimands without collapsing the distinct roles of the available representations. The primary forward estimator uses observed replicate-decoupled AB/BA measurements and exact equal fold weight after binning. The primary fluctuation estimator is the signed cross-replicate covariance
@@ -758,11 +758,11 @@ $$
 
 $x_{\star}^{\mathrm{latent}}$ and the observed midpoint are retained as conditioning sensitivities, while $x_0^{\mathrm{latent}}$, $x_{\mathrm{mid}}^{\mathrm{latent}}$, and $x_{\star}^{\mathrm{latent}}$ against $\Delta x^{\mathrm{latent}}$ form a separate latent-geometry diagnostic. No composite performance score, automatic dispersion-based selection rule, or universal representation ranking was used.
 
-<a id="method-iv"></a>
-## (iv) Replicate-decoupled forward dynamics and comparison with the pseudo-longitudinal technical reference
-<a id="iv-observed-replicate-decoupled-forward-estimator"></a>
-### Observed replicate-decoupled forward estimator
-The genuine longitudinal forward analysis was implemented in `code/03_validation/9-observed_replicate_decoupled_forward_drift.py` using the generic Step-5 transition table. The primary lag was $\Delta t=1$ week. The analysis used the replicate-resolved observed log-frequency fields and the estimand-specific eligibility flags generated during transition assembly; replicate-specific latent posterior summaries were not required.
+## (iv) Replicate-decoupled forward dynamics and comparison with the pseudo-longitudinal technical reference {#method-iv}
+
+### Observed replicate-decoupled forward estimator {#iv-observed-replicate-decoupled-forward-estimator}
+
+The genuine longitudinal forward analysis was implemented in `9-observed_replicate_decoupled_forward_drift.py` using the generic Step-5 transition table. The primary lag was $\Delta t=1$ week. The analysis used the replicate-resolved observed log-frequency fields and the estimand-specific eligibility flags generated during transition assembly; replicate-specific latent posterior summaries were not required.
 
 For the AB orientation, the conditioning variable was the observed baseline log-frequency in replicate 1 and the outcome was the observed displacement measured entirely in replicate 2. For the reciprocal BA orientation, the roles of the replicates were exchanged:
 
@@ -776,8 +776,8 @@ $$
 
 AB eligibility required replicate 1 to be positive at $t_0$ and replicate 2 to be positive at both endpoints; BA used the reciprocal requirement. These conditions correspond to `forward_ab_eligible` and `forward_ba_eligible`. No primary restriction by operational TT/TF/FT/FF class was imposed.
 
-<a id="iv-abundance-binning-and-fold-combination"></a>
-### Abundance binning and fold combination
+### Abundance binning and fold combination {#iv-abundance-binning-and-fold-combination}
+
 One common observed-abundance grid was used for AB, BA and the matched same-versus-cross controls. With the production settings, 20 quantile bins were defined over the 0.005–0.995 range of an exact equal-mass mixture of the two primary conditioning distributions. Each AB conditioning value received weight $0.5/n_{\mathrm{AB}}$ and each BA conditioning value weight $0.5/n_{\mathrm{BA}}$ when the bin edges were constructed. Thus, bin geometry and combined estimates were invariant to unequal AB/BA row counts.
 
 Within each fold and abundance bin, the analysis retained the number of transitions and contributing subjects, mean and median displacement, the probability of positive displacement, and the displacement standard deviation. A bin was considered valid when it contained at least 50 eligible transitions. For bins valid in both folds, the combined forward quantities were calculated with exact equal fold weight:
@@ -800,9 +800,9 @@ $$
 
 AB and BA were therefore never concatenated and treated as independent biological observations. Fold-specific support was retained separately because the reciprocal folds can contain overlapping transitions.
 
-<a id="iv-subject-level-uncertainty-and-curve-descriptors"></a>
-### Subject-level uncertainty and curve descriptors
-Uncertainty in the longitudinal forward profile was quantified by resampling biological subjects with replacement (2,000 bootstrap replicates; seed 123). The same resampled subject set was used simultaneously for AB, BA and the matched controls. Each fold was reconstructed separately within every bootstrap sample and reciprocal folds were then combined with the same 0.5/0.5 rule used for the point estimate. Percentile bootstrap intervals were obtained from the resulting subject-cluster distributions.
+### Subject-level uncertainty and curve descriptors {#iv-subject-level-uncertainty-and-curve-descriptors}
+
+Uncertainty in the longitudinal forward profile was quantified by resampling biological subjects with replacement (2,000 bootstrap replicates; seed 123), preserving the subject as the resampling unit for the clustered longitudinal data (Deen and de Rooij, 2020). The same resampled subject set was used simultaneously for AB, BA and the matched controls. Each fold was reconstructed separately within every bootstrap sample and reciprocal folds were then combined with the same 0.5/0.5 rule used for the point estimate. Percentile bootstrap intervals were obtained from the resulting subject-cluster distributions.
 
 For descriptive summarization, an unweighted linear relation was fitted across the fixed set of valid abundance-bin centers:
 
@@ -814,8 +814,8 @@ $$
 
 The slope, intercept and zero-crossing were treated as compact descriptors of the nonparametric binned profile rather than as parameters of a prespecified generative drift model. Bootstrap descriptors were evaluated on the same valid-bin domain as the corresponding point estimate. Subject-specific and leave-one-subject-out curves were generated as robustness diagnostics.
 
-<a id="iv-matched-same-measure-control"></a>
-### Matched same-measure control
+### Matched same-measure control {#iv-matched-same-measure-control}
+
 The direct effect of reusing the same technical measurement for both conditioning and displacement was assessed on `common4`, where both replicates were positive at both transition endpoints. On this matched support, same-replicate and cross-replicate constructions were evaluated on exactly the same transitions:
 
 $$
@@ -832,9 +832,9 @@ $$
 
 The same and cross controls were combined separately with equal A/B or AB/BA fold weight. This analysis was used as a technical coupling diagnostic and did not replace the broader estimand-specific AB/BA support of the primary forward analysis.
 
-<a id="iv-reference-to-the-pseudo-longitudinal-technical-null"></a>
-### Reference to the pseudo-longitudinal technical null
-Comparison with the pseudo-longitudinal technical reference was implemented in `code/03_validation/10-longitudinal_vs_pseudo_forward_null.py`. Step 10 required the final Step-7 and Step-9 outputs to implement the same observed replicate-decoupled AB/BA estimand and the same exact equal-fold combination policy; it did not introduce a TT/TF/FT/FF filter.
+### Reference to the pseudo-longitudinal technical reference {#iv-reference-to-the-pseudo-longitudinal-technical-null}
+
+Comparison with the pseudo-longitudinal technical reference was implemented in `10-longitudinal_vs_pseudo_forward_null.py`. Step 10 required the final Step-7 and Step-9 outputs to implement the same observed replicate-decoupled AB/BA estimand and the same exact equal-fold combination policy; it did not introduce a TT/TF/FT/FF filter.
 
 Only the methodological features required to interpret the comparison are summarized here. The absolute-abundance analysis retained the native longitudinal and pseudo bin geometries and compared them only on their shared observed-log-frequency support, without extrapolation; pseudo native bins missing in an individual configuration were not imputed. A complementary relative-abundance analysis assigned transition-level mid-rank percentiles separately within biological subject × fold for the longitudinal cohort and within randomization configuration × fold for the pseudo ensemble:
 
@@ -844,11 +844,11 @@ $$
 
 AB and BA were percentile-ranked and binned separately before equal-fold combination. Longitudinal intervals in this comparison remained biological subject-cluster bootstrap intervals, whereas pseudo intervals reflected the distribution across randomized pseudo configurations and were therefore randomization intervals rather than biological confidence intervals. Curve-level empirical comparisons used the pseudo-configuration distribution with a finite-sample +1 correction. The detailed comparison descriptors and their interpretation are presented with the corresponding Results.
 
-<a id="method-v"></a>
-## (v) Replicate-resolved fluctuation dynamics, technical-null reference and temporal scaling
-<a id="v-cross-replicate-fluctuation-estimand"></a>
-### Cross-replicate fluctuation estimand
-The genuine longitudinal fluctuation analysis was implemented in `code/03_validation/11-cross_replicate_fluctuation_dynamics.py` from the generic Step-5 transition table. The primary support was `common4`, defined as transitions for which both observed technical replicates were positive at both endpoints. Operational TT/TF/FT/FF classes were not used as a primary filter. The conditioning coordinate was the latent midpoint, whereas the fluctuation outcomes were the two independently observed replicate-resolved displacements.
+## (v) Replicate-resolved fluctuation dynamics, technical-reference comparison and temporal scaling {#method-v}
+
+### Cross-replicate fluctuation estimand {#v-cross-replicate-fluctuation-estimand}
+
+The genuine longitudinal fluctuation analysis was implemented in `11-cross_replicate_fluctuation_dynamics.py` from the generic Step-5 transition table. The primary support was `common4`, defined as transitions for which both observed technical replicates were positive at both endpoints. Operational TT/TF/FT/FF classes were not used as a primary filter. The conditioning coordinate was the latent midpoint, whereas the fluctuation outcomes were the two independently observed replicate-resolved displacements.
 
 $$
 \Delta x_A=x_A(t_1)-x_A(t_0),
@@ -882,7 +882,7 @@ V_{\mathrm{excess}}
 =V_{\mathrm{same}}-V_{\mathrm{cross}}.
 $$
 
-The complementary shared fraction, defined as the ratio of cross-replicate covariance to mean within-replicate variance, was reported when the denominator was positive. All covariance and variance estimates used `ddof=1`. Importantly, cross-replicate covariance remained signed; negative estimates were not clipped to zero. The implementation additionally verified the covariance identity
+The complementary shared-fluctuation ratio, defined as cross-replicate covariance divided by mean within-replicate variance, was reported when the denominator was positive. All covariance and variance estimates used `ddof=1`. Importantly, cross-replicate covariance remained signed; negative estimates were not clipped to zero. The implementation additionally verified the covariance identity
 
 $$
 \operatorname{Cov}(A,B)
@@ -893,23 +893,23 @@ $$
 
 numerically in pooled, subject-level and interval-level cells as an internal construction audit.
 
-<a id="v-abundance-grid-lag-resolved-profiles-and-uncertainty"></a>
-### Abundance grid, lag-resolved profiles and uncertainty
+### Abundance grid, lag-resolved profiles and uncertainty {#v-abundance-grid-lag-resolved-profiles-and-uncertainty}
+
 A single abundance grid was reused across $\Delta t=1$–5 weeks so that lag-specific profiles were evaluated on a common latent-midpoint geometry. With the production settings, 20 equal-width bins were defined between the 0.01 and 0.99 quantiles of the latent midpoint among finite `common4` transitions pooled across the selected lags. A pooled lag × abundance cell was considered supported when it contained at least 50 transitions.
 
-For each supported cell, the analysis retained cross-replicate covariance, mean within-replicate variance, replicate-specific excess, shared fraction, replicate-specific mean displacements, transition count, number of contributing subjects and number of contributing subject-specific physical intervals. The primary cohort curve was transition-weighted: sufficient statistics were summed across subjects before reconstructing the covariance rather than averaging subject-level covariance estimates.
+For each supported cell, the analysis retained cross-replicate covariance, mean within-replicate variance, replicate-specific excess, shared-fluctuation ratio, replicate-specific mean displacements, transition count, number of contributing subjects and number of contributing subject-specific physical intervals. The primary cohort curve was transition-weighted: sufficient statistics were summed across subjects before reconstructing the covariance rather than averaging subject-level covariance estimates.
 
-Biological uncertainty was quantified with 2,000 subject-cluster bootstrap resamples (seed 123). Subjects were sampled with replacement, and the pooled sufficient statistics were reconstructed from the selected subject multiplicities before recalculating the covariance decomposition. A bootstrap draw contributed to a lag × abundance-cell interval only when its reconstructed transition count satisfied the same minimum-$n$ criterion as the point estimate. Subject × lag × bin and subject × physical-interval × bin estimates were also retained for downstream temporal and interval-position analyses.
+Biological uncertainty was quantified with 2,000 subject-cluster bootstrap resamples (seed 123), preserving within-subject dependence during resampling (Deen and de Rooij, 2020). Subjects were sampled with replacement, and the pooled sufficient statistics were reconstructed from the selected subject multiplicities before recalculating the covariance decomposition. A bootstrap draw contributed to a lag × abundance-cell interval only when its reconstructed transition count satisfied the same minimum-$n$ criterion as the point estimate. Subject × lag × bin and subject × physical-interval × bin estimates were also retained for downstream temporal and interval-position analyses.
 
-<a id="v-reference-to-the-pseudo-longitudinal-technical-null"></a>
-### Reference to the pseudo-longitudinal technical null
-The technical-reference comparison was implemented in `code/03_validation/12-longitudinal_vs_pseudo_cross_replicate_fluctuations.py` using exactly the same primary estimand, support and conditioning coordinate in the genuine and pseudo-longitudinal datasets. Because covariance magnitude is abundance dependent, the comparison was performed on matched absolute latent-midpoint support separately at each lag; no percentile normalization was used. Stable pseudo native bins were identified from configuration-level Step-8 support, and pseudo configurations were required to provide directly valid values over the matched bin set. Missing pseudo bins were not interpolated or imputed. Only the genuine longitudinal curve was locally interpolated between adjacent valid Step-11 bins when required to evaluate it at the matched Step-8 native bin centers.
+### Reference to the pseudo-longitudinal technical reference {#v-reference-to-the-pseudo-longitudinal-technical-null}
 
-The lag-specific scalar comparison used the equal-bin mean of cross-replicate covariance across the retained matched abundance bins. Pseudo configurations represented randomization realizations rather than biological subjects, whereas longitudinal uncertainty remained based on biological subject resampling. This technical-null comparison was not used as a preprocessing correction: Step-12 covariance was not subtracted from Step-11 values before temporal-scaling analysis.
+The technical-reference comparison was implemented in `12-longitudinal_vs_pseudo_cross_replicate_fluctuations.py` using exactly the same primary estimand, support and conditioning coordinate in the genuine and pseudo-longitudinal datasets. Because covariance magnitude is abundance dependent, the comparison was performed on matched absolute latent-midpoint support separately at each lag; no percentile normalization was used. Stable pseudo native bins were identified from configuration-level Step-8 support, and pseudo configurations were required to provide directly valid values over the matched bin set. Missing pseudo bins were not interpolated or imputed. Only the genuine longitudinal curve was locally interpolated between adjacent valid Step-11 bins when required to evaluate it at the matched Step-8 native bin centers.
 
-<a id="v-fixed-core-temporal-scaling-across-1-5-weeks"></a>
-### Fixed-core temporal scaling across 1–5 weeks
-Temporal scaling was implemented in `code/03_validation/13-temporal_fluctuation_scaling.py` using the subject × lag × abundance-bin output of Step 11. Step 12 was not a computational input. To prevent lag-specific changes in abundance or subject composition from generating an apparent temporal trend, both the abundance domain and the biological cohort were fixed before fitting temporal models.
+The lag-specific scalar comparison used the equal-bin mean of cross-replicate covariance across the retained matched abundance bins. Pseudo configurations represented randomization realizations rather than biological subjects, whereas longitudinal uncertainty remained based on biological subject resampling. This technical-reference comparison was not used as a preprocessing correction: Step-12 covariance was not subtracted from Step-11 values before temporal-scaling analysis.
+
+### Fixed-core temporal scaling across 1–5 weeks {#v-fixed-core-temporal-scaling-across-1-5-weeks}
+
+Temporal scaling was implemented in `13-temporal_fluctuation_scaling.py` using the subject × lag × abundance-bin output of Step 11. Step 12 was not a computational input. To prevent lag-specific changes in abundance or subject composition from generating an apparent temporal trend, both the abundance domain and the biological cohort were fixed before fitting temporal models.
 
 Let $N_{\mathrm{available}}(\Delta t)$ denote the number of subjects structurally available at lag $\Delta t$. A Step-11 abundance bin qualified for the temporal core only when, at every selected lag, it contained at least
 
@@ -919,8 +919,8 @@ $$
 
 subjects with a finite subject-level cross covariance and at least two transitions in that subject × lag × bin cell, the mathematical minimum for covariance with `ddof=1`. The largest contiguous run of qualifying bins defined the primary abundance core. The primary complete-case cohort then retained only subjects with valid values in every selected core bin at every lag.
 
-<a id="v-primary-temporal-estimator-and-sensitivity-weighting"></a>
-### Primary temporal estimator and sensitivity weighting
+### Primary temporal estimator and sensitivity weighting {#v-primary-temporal-estimator-and-sensitivity-weighting}
+
 For complete-case subject $s$ at lag $\Delta t$, the primary subject-level core summary gave every selected abundance bin equal weight:
 
 $$
@@ -941,11 +941,11 @@ $$
 
 This equal-bin/equal-subject construction was the primary estimator (`equal_bin_equal_subject`). A precision-oriented sensitivity (`df_weighted_within_subject_equal_subject`) weighted bins within each subject × lag by their covariance degrees of freedom, $n-1$, and then averaged subjects equally. The sensitivity weighting did not replace the fixed-geometry primary estimator.
 
-Cross-replicate covariance was the primary temporal metric. The mean within-replicate variance and replicate-specific excess were analysed as technical comparators. The shared-fraction ratio was not used as a default temporal-scaling metric because it can become unstable when its variance denominator is small.
+Cross-replicate covariance was the primary temporal metric. The mean within-replicate variance and replicate-specific excess were analysed as technical comparators. The shared-fluctuation ratio was not used as a default temporal-scaling metric because it can become unstable when its variance denominator is small.
 
-<a id="v-signed-temporal-slope-bootstrap-inference-and-finite-lag-models"></a>
-### Signed temporal slope, bootstrap inference and finite-lag models
-Temporal dependence was summarized by fitting the five lag-specific cohort values with the signed linear descriptor
+### Signed temporal slope, bootstrap inference and finite-lag models {#v-signed-temporal-slope-bootstrap-inference-and-finite-lag-models}
+
+Temporal dependence was summarized by fitting the five lag-specific cohort values with the signed linear descriptor. Analyses of fluctuation magnitude as a function of temporal separation have previously been used to characterize T-cell clone-size dynamics, although with different estimands and time scales (Gaimann et al., 2020; Bensouda Koraichi et al., 2023).
 
 $$
 M(\Delta t)=K+D(\Delta t-1),
@@ -966,8 +966,43 @@ $$
 $$
 
 $$
-\text{positive incremental:}\qquad
+\text{non-negative incremental-linear:}\qquad
 M(\Delta t)=K+D(\Delta t-1),\qquad D\ge 0.
 $$
 
-Model comparison used AICc with the residual-variance parameter included. Because only five temporal lags were available, AICc preference was treated as a descriptive finite-lag comparison and was kept separate from signed-slope evidence. Within the selected core, bin-specific temporal slopes were additionally estimated as an abundance-resolved secondary analysis using the same complete-case subjects and joint bootstrap draws. No specific stochastic mechanism was inferred from the five sampled lag values.
+Model comparison used AICc with the residual-variance parameter included, using the small-sample correction to Akaike's information criterion (Hurvich and Tsai, 1989). Because only five temporal lags were available, AICc preference was treated as a descriptive finite-lag comparison and was kept separate from signed-slope evidence. Within the selected core, bin-specific temporal slopes were additionally estimated as an abundance-resolved secondary analysis using the same complete-case subjects and joint bootstrap draws. No specific stochastic mechanism was inferred from the five sampled lag values.
+
+## References
+
+Barennes P, Quiniou V, Shugay M, et al. Benchmarking of T cell receptor repertoire profiling methods reveals large systematic biases. *Nature Biotechnology*. 2021;39:236–245. doi:10.1038/s41587-020-0656-3.
+
+Bensouda Koraichi M, Ferri S, Walczak AM, Mora T. Inferring the T cell repertoire dynamics of healthy individuals. *Proceedings of the National Academy of Sciences of the USA*. 2023;120(4):e2207516120. doi:10.1073/pnas.2207516120.
+
+Chiolero A, Paradis G, Rich B, Hanley JA. Assessing the relationship between the baseline value of a continuous variable and subsequent change over time. *Frontiers in Public Health*. 2013;1:29. doi:10.3389/fpubh.2013.00029.
+
+Clauset A, Shalizi CR, Newman MEJ. Power-law distributions in empirical data. *SIAM Review*. 2009;51(4):661–703. doi:10.1137/070710111.
+
+Deen M, de Rooij M. ClusterBootstrap: An R package for the analysis of hierarchical data using generalized linear models with the cluster bootstrap. *Behavior Research Methods*. 2020;52(2):572–590. doi:10.3758/s13428-019-01252-y.
+
+Desponds J, Mora T, Walczak AM. Fluctuating fitness shapes the clone-size distribution of immune repertoires. *Proceedings of the National Academy of Sciences of the USA*. 2016;113(2):274–279. doi:10.1073/pnas.1512977112.
+
+Gaimann MU, Nguyen M, Desponds J, Mayer A. Early life imprints the hierarchy of T cell clone sizes. *eLife*. 2020;9:e61639. doi:10.7554/eLife.61639.
+
+Gelman A, Meng XL, Stern H. Posterior predictive assessment of model fitness via realized discrepancies. *Statistica Sinica*. 1996;6:733–760.
+
+Hurvich CM, Tsai CL. Regression and time series model selection in small samples. *Biometrika*. 1989;76(2):297–307. doi:10.1093/biomet/76.2.297.
+
+Koch H, Starenki D, Cooper SJ, Myers RM, Li Q. powerTCR: A model-based approach to comparative analysis of the clone size distribution of the T cell receptor repertoire. *PLoS Computational Biology*. 2018;14(11):e1006571. doi:10.1371/journal.pcbi.1006571.
+
+Minervina AA, Pogorelyy MV, Komech EA, et al. Primary and secondary anti-viral response captured by the dynamics and phenotype of individual T cell clones. *eLife*. 2020;9:e53704. doi:10.7554/eLife.53704.
+
+Oldham PD. A note on the analysis of repeated measurements of the same subjects. *Journal of Chronic Diseases*. 1962;15(10):969–977. doi:10.1016/0021-9681(62)90116-9.
+
+Pogorelyy MV, Minervina AA, Puelma Touzel M, et al. Precise tracking of vaccine-responding T cell clones reveals convergent and personalized response in identical twins. *Proceedings of the National Academy of Sciences of the USA*. 2018;115(50):12704–12709. doi:10.1073/pnas.1809642115.
+
+Puelma Touzel M, Walczak AM, Mora T. Inferring the immune response from repertoire sequencing. *PLoS Computational Biology*. 2020;16(4):e1007873. doi:10.1371/journal.pcbi.1007873.
+
+Shugay M, Bagaev DV, Turchaninova MA, et al. VDJtools: Unifying post-analysis of T cell receptor repertoires. *PLoS Computational Biology*. 2015;11(11):e1004503. doi:10.1371/journal.pcbi.1004503.
+
+Trück J, Eugster A, Barennes P, et al. Biological controls for standardization and interpretation of adaptive immune receptor repertoire profiling. *eLife*. 2021;10:e66274. doi:10.7554/eLife.66274.
+

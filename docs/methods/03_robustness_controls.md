@@ -1,28 +1,4 @@
-# Robustness and sensitivity methods
-
-## Interval composition, operational observation domain, and observation-threshold robustness (Steps 14–16)
-
-This document is the **living GitHub methods documentation** for the final ClonoDynamics robustness analyses. It preserves the scientific specification prepared for the associated manuscript while mapping the implementation to the current repository layout.
-
-These analyses are downstream controls: they do not refit the latent-state model, introduce alternative primary dynamical outcomes, subtract the pseudo technical reference, or reinterpret operational T/F labels as biological presence/absence.
-
-For routine execution, use:
-
-```bash
-python3 code/orchestrator_clonodynamics.py
-```
-
-then select **Analysis → controls**.
-
-Current implementations:
-
-- Step 14: `code/04_controls/14-interval_position_structure.py`
-- Step 15: `code/04_controls/15-detectability_boundary_sensitivity.py`
-- Step 16: `code/04_controls/16-analyze_observation_threshold_robustness.py`
-
-[Back to the ClonoDynamics README](../../README.md)
-
----
+## Extended Methods - 3
 
 ### 1. Scope and frozen upstream architecture
 
@@ -55,7 +31,7 @@ V_{\mathrm{excess}}
 =V_{\mathrm{same}}-V_{\mathrm{cross}}.
 $$
 
-Step 14 inherited both the fixed `xmid_latent` abundance core and the complete-case biological-subject set selected by Step 13. It therefore tested composition sensitivity on the same support used for the primary temporal analysis rather than selecting a new abundance domain. The finalized `code/04_controls/14-interval_position_structure.py` implementation explicitly rejects legacy TT-filtered, `xstar_latent`-conditioned variance/MSD inputs.
+Step 14 inherited both the fixed `xmid_latent` abundance core and the complete-case biological-subject set selected by Step 13. It therefore tested composition sensitivity on the same support used for the primary temporal analysis rather than selecting a new abundance domain. The finalized `14-interval_position_structure.py` implementation explicitly rejects legacy TT-filtered, `xstar_latent`-conditioned variance/MSD inputs.
 
 ### 2. Calendar-position analysis
 
@@ -87,16 +63,16 @@ $$
 
 where $P$ is the number of retained positions. A secondary statistic was the absolute ordinary-least-squares slope of $\bar y_p$ versus $t_0$.
 
-The permutation null preserved each subject's observed set of finite interval values and missingness pattern. For each subject independently, finite values were randomly permuted among that subject's available calendar positions; the missing positions were not filled. The cohort profile and both statistics were then recalculated. The procedure therefore preserved subject identity, lag, metric distribution, fixed abundance composition, and subject-specific missingness while removing synchronized association with calendar position.
+The permutation null preserved each subject's observed set of finite interval values and missingness pattern. For each subject independently, finite values were randomly permuted among that subject's available calendar positions; the missing positions were not filled. The cohort profile and both statistics were then recalculated. The procedure therefore preserved subject identity, lag, metric distribution, fixed abundance composition, and subject-specific missingness while removing synchronized association with calendar position. Restricting permutations to rearrangements compatible with the repeated-measures dependence structure follows the general exchangeability principle for structured permutation inference (Winkler et al., 2015).
 
-For $B=2000$ permutations, an upper-tail empirical P value for statistic $T$ was
+For $B=2000$ permutations, an upper-tail empirical P value for statistic $T$ was calculated with the finite-sample +1 correction (Phipson and Smyth, 2010):
 
 $$
 p_{\mathrm{emp}}
 =\frac{1+\sum_{b=1}^{B}\mathbf 1\!\left(T_b^{*}\ge T_{\mathrm{obs}}\right)}{B+1}.
 $$
 
-Benjamini–Hochberg correction was performed separately for the RMS and absolute-slope statistics. For the primary core-level analysis, correction was applied within metric across valid lags. A secondary abundance-resolved analysis repeated the same permutation design within individual core bins and applied correction within metric across all valid lag × bin tests.
+Benjamini–Hochberg false-discovery-rate correction was performed separately for the RMS and absolute-slope statistics (Benjamini and Hochberg, 1995). For the primary core-level analysis, correction was applied within metric across valid lags. A secondary abundance-resolved analysis repeated the same permutation design within individual core bins and applied correction within metric across all valid lag × bin tests.
 
 ### 3. Common-start and common-end anchoring
 
@@ -113,7 +89,7 @@ $$
 M(\Delta t)=K+D(\Delta t-1)
 $$
 
-was fitted by ordinary least squares, with at least four finite lag values required. Biological uncertainty was quantified using $B=2000$ subject-cluster bootstrap replicates. A subject sample was drawn once per replicate and its multiplicities were propagated jointly across all lags before refitting $D$. Percentile intervals and the fractions of bootstrap slopes above and below zero were reported. For `matched_all_dt`, subject-specific slopes and exact sign-flip tests were additionally retained as conservative subject-level diagnostics. Step 14 did not rerun the Step-13 finite-lag model comparison.
+was fitted by ordinary least squares, with at least four finite lag values required. Biological uncertainty was quantified using $B=2000$ subject-cluster bootstrap replicates, preserving the biological subject as the resampling unit (Deen and de Rooij, 2020). A subject sample was drawn once per replicate and its multiplicities were propagated jointly across all lags before refitting $D$. Percentile intervals and the fractions of bootstrap slopes above and below zero were reported. For `matched_all_dt`, subject-specific slopes and exact sign-flip tests were additionally retained as conservative subject-level diagnostics. Step 14 did not rerun the Step-13 finite-lag model comparison.
 
 ### 4. Operational observation classes at the reference threshold
 
@@ -201,7 +177,7 @@ was fitted separately for each operational domain. The same subject bootstrap dr
 
 ### 8. Numerical observation-threshold robustness
 
-Step 16 varied the operational threshold over
+Step 16 varied the operational threshold over the prespecified grid below as a sensitivity analysis of the operational observation boundary, rather than as threshold optimization (Thabane et al., 2013):
 
 $$
 \alpha\in\{0.10,\ 0.05,\ 0.025,\ 0.01\},
@@ -225,4 +201,17 @@ Because subject universes, seeds, and bootstrap draw IDs were identical across $
 
 ### 9. Interpretation boundaries and software implementation
 
-The analyses were implemented in `code/04_controls/14-interval_position_structure.py`, `code/04_controls/15-detectability_boundary_sensitivity.py`, and `code/04_controls/16-analyze_observation_threshold_robustness.py`, which respectively addressed interval composition, fixed-threshold operational-domain sensitivity, and numerical-threshold robustness. None refitted latent abundance, subtracted the pseudo-longitudinal Step-12 technical reference, interpreted operational T/F as biological presence/absence, or replaced the manuscript-primary Step-9, Step-11, or Step-13 estimands.
+The analyses were implemented in `14-interval_position_structure.py`,<br>           `15-detectability_boundary_sensitivity.py`, and `16-analyze_observation_threshold_robustness.py`, which respectively addressed interval composition, fixed-threshold operational-domain sensitivity, and numerical-threshold robustness. None refitted latent abundance, subtracted the pseudo-longitudinal Step-12 technical reference, interpreted operational T/F as biological presence/absence, or replaced the manuscript-primary Step-9, Step-11, or Step-13 estimands.
+
+## References
+
+Benjamini Y, Hochberg Y. Controlling the false discovery rate: a practical and powerful approach to multiple testing. *Journal of the Royal Statistical Society: Series B (Methodological)*. 1995;57(1):289–300. doi:10.1111/j.2517-6161.1995.tb02031.x.
+
+Deen M, de Rooij M. ClusterBootstrap: An R package for the analysis of hierarchical data using generalized linear models with the cluster bootstrap. *Behavior Research Methods*. 2020;52(2):572–590. doi:10.3758/s13428-019-01252-y.
+
+Phipson B, Smyth GK. Permutation P-values should never be zero: calculating exact P-values when permutations are randomly drawn. *Statistical Applications in Genetics and Molecular Biology*. 2010;9:Article 39. doi:10.2202/1544-6115.1585.
+
+Thabane L, Mbuagbaw L, Zhang S, et al. A tutorial on sensitivity analyses in clinical trials: the what, why, when and how. *BMC Medical Research Methodology*. 2013;13:92. doi:10.1186/1471-2288-13-92.
+
+Winkler AM, Webster MA, Vidaurre D, Nichols TE, Smith SM. Multi-level block permutation. *NeuroImage*. 2015;123:253–268. doi:10.1016/j.neuroimage.2015.05.092.
+
