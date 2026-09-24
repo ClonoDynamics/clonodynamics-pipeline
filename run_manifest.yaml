@@ -3,7 +3,7 @@ project:
   repository: https://github.com/ClonoDynamics/clonodynamics-pipeline
   branch: main
   git_commit: 686a59717b0430ccd655fd42d542d5cd16a50546
-  release_tag: TODO
+  release_tag: v1.0.0-biorxiv
 
 environment:
   python: "3.9.22"
