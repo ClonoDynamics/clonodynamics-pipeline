@@ -1,0 +1,58 @@
+cff-version: 1.2.0
+message: "If you use ClonoDynamics, please cite the associated preprint and the archived software release."
+
+title: "ClonoDynamics"
+type: software
+
+authors:
+  - family-names: "Aversa"
+    given-names: "I."
+  - family-names: "Gallo"
+    given-names: "R."
+  - family-names: "Abatino"
+    given-names: "A."
+  - family-names: "Iannone"
+    given-names: "F."
+  - family-names: "Isdraele Romano"
+    given-names: "L."
+  - family-names: "Giordano"
+    given-names: "C."
+  - family-names: "Marrano"
+    given-names: "M."
+  - family-names: "Fiume"
+    given-names: "G."
+  - family-names: "Palmieri"
+    given-names: "C."
+  - family-names: "Cuda"
+    given-names: "G."
+
+repository-code: "https://github.com/ClonoDynamics/clonodynamics-pipeline"
+
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Aversa"
+      given-names: "I."
+    - family-names: "Gallo"
+      given-names: "R."
+    - family-names: "Abatino"
+      given-names: "A."
+    - family-names: "Iannone"
+      given-names: "F."
+    - family-names: "Isdraele Romano"
+      given-names: "L."
+    - family-names: "Giordano"
+      given-names: "C."
+    - family-names: "Marrano"
+      given-names: "M."
+    - family-names: "Fiume"
+      given-names: "G."
+    - family-names: "Palmieri"
+      given-names: "C."
+    - family-names: "Cuda"
+      given-names: "G."
+
+  title: "ClonoDynamics enables replicate-resolved inference of longitudinal T cell receptor repertoire dynamics"
+  journal: "bioRxiv"
+  year: 2026
+  doi: "10.64898/2026.09.24.754170v1"
