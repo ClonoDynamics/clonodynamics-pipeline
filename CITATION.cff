@@ -1,30 +1,24 @@
 cff-version: 1.2.0
 message: "If you use ClonoDynamics, please cite the associated preprint and the archived software release."
 
-title: "ClonoDynamics"
+title: "ClonoDynamics: a noise-aware pipeline for longitudinal T-cell receptor repertoire dynamics"
 type: software
 
 authors:
-  - family-names: "Aversa"
-    given-names: "I."
-  - family-names: "Gallo"
-    given-names: "R."
-  - family-names: "Abatino"
-    given-names: "A."
-  - family-names: "Iannone"
-    given-names: "F."
-  - family-names: "Isdraele Romano"
-    given-names: "L."
-  - family-names: "Giordano"
-    given-names: "C."
-  - family-names: "Marrano"
-    given-names: "M."
-  - family-names: "Fiume"
-    given-names: "G."
   - family-names: "Palmieri"
-    given-names: "C."
-  - family-names: "Cuda"
-    given-names: "G."
+    given-names: "Camillo"
+  - family-names: "Aversa"
+    given-names: "Ilenia"
+  - family-names: "Gallo"
+    given-names: "Raffaella"
+  - family-names: "Abatino"
+    given-names: "Antonio"
+  - family-names: "Isdraele Romano"
+    given-names: "Lisa"
+
+version: "v1.0.0-biorxiv"
+date-released: 2026-09-23
+doi: "10.5281/zenodo.22925873"
 
 repository-code: "https://github.com/ClonoDynamics/clonodynamics-pipeline"
 
