@@ -26,6 +26,29 @@ The launcher contains the validated orchestration engines for analysis and figur
 
 ---
 
+# Associated publication
+
+ClonoDynamics is described in the following preprint:
+
+**ClonoDynamics enables replicate-resolved inference of longitudinal T cell receptor repertoire dynamics**
+
+Aversa I, Gallo R, Abatino A, Iannone F, Isdraele Romano L, Giordano C, Marrano M, Fiume G, Palmieri C, Cuda G.
+
+**bioRxiv (2026)**  
+**DOI:** [10.64898/2026.09.24.754170v1](https://doi.org/10.64898/2026.09.24.754170v1)
+
+### Access the preprint
+
+<a href="https://doi.org/10.64898/2026.09.24.754170v1">
+  <img src="qr_img.png"
+       alt="QR code for the ClonoDynamics bioRxiv preprint"
+       width="160">
+</a>
+
+---
+
+---
+
 # Scientific scope
 
 ClonoDynamics is designed for longitudinal RepSeq studies in which technical replicate structure is available and where measurement noise, stochastic dropout, conditioning geometry, observation-domain definitions, and operational observation thresholds must be distinguished from genuine temporal structure.
@@ -1467,24 +1490,29 @@ ClonoDynamics Reference Space
 
 # Citation
 
-If you use ClonoDynamics, please cite the associated manuscript and archived software release:
+If you use ClonoDynamics, please cite the associated preprint and the archived software release.
 
-```text
-ClonoDynamics: replicate-resolved inference and validation
-of longitudinal T-cell receptor repertoire dynamics
+## Associated preprint
 
-[full manuscript citation / DOI to be added]
+Aversa I, Gallo R, Abatino A, Iannone F, Isdraele Romano L, Giordano C, Marrano M, Fiume G, Palmieri C, Cuda G.
 
-Software DOI:
+**ClonoDynamics enables replicate-resolved inference of longitudinal T cell receptor repertoire dynamics.**
+
+bioRxiv (2026).  
+https://doi.org/10.64898/2026.09.24.754170v1
+
+## Software
+
+ClonoDynamics software repository:  
+https://github.com/ClonoDynamics/clonodynamics-pipeline
+
+**Software DOI:**  
 [to be added]
 
-Reproducibility-data DOI:
+**Reproducibility-data DOI:**  
 [to be added]
-```
 
-A machine-readable `CITATION.cff` file should accompany the public release.
-
----
+A machine-readable `CITATION.cff` file is provided with the repository.
 
 # Contact
 
