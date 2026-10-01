@@ -39,13 +39,7 @@ Aversa I, Gallo R, Abatino A, Iannone F, Isdraele Romano L, Giordano C, Marrano 
 
 ### Access the preprint
 
-<a href="https://doi.org/10.64898/2026.09.24.754170v1">
-  <img src="qr_img.png"
-       alt="QR code for the ClonoDynamics bioRxiv preprint"
-       width="160">
-</a>
-
----
+[![QR code for the ClonoDynamics bioRxiv preprint](./qr_img.png)](https://doi.org/10.64898/2026.09.24.754170v1)
 
 ---
 
