@@ -1432,29 +1432,32 @@ The manuscript release should include a pinned environment specification or equi
 
 ClonoDynamics operates on processed clonotype-level repertoire tables.
 
-The manuscript release will provide persistent access to the different data layers separately.
+The manuscript-associated resources are publicly available through persistent repositories, with raw sequencing data, processed/reproducibility data, source code, and the frozen software release maintained as distinct resources.
 
 ```text
 Raw sequencing:
     NCBI Sequence Read Archive
-    BioProject: [TO BE ADDED]
-    SRA Study:  [TO BE ADDED]
+    BioProject: PRJNA1457834
+    SRA Study:  SRP694925
 
 Processed repertoire and reproducibility data:
     Zenodo
-    DOI: [TO BE ADDED]
+    DOI: https://doi.org/10.5281/zenodo.22925114
 
 Source repository:
     https://github.com/ClonoDynamics/clonodynamics-pipeline
 
 Frozen software release:
-    GitHub release / Zenodo
-    DOI: [TO BE ADDED]
+    ClonoDynamics v1.0.0-biorxiv
+    Zenodo
+    DOI: https://doi.org/10.5281/zenodo.22925873
 ```
 
-Raw FASTQ files deposited in SRA are not duplicated in the derived-data archive.
+Raw FASTQ files deposited in the NCBI Sequence Read Archive are not duplicated in the Zenodo reproducibility archive.
 
-The reproducibility archive should contain, among other compact provenance objects, the exact pseudo-design manifests and configuration-level outputs required to reconstruct the 2,000-configuration technical reference.
+The reproducibility dataset contains the processed clonotype-level repertoires and compact analysis outputs required to reproduce and audit the reported analyses, including the frozen pseudo-longitudinal design manifests, configuration-level technical-reference outputs, longitudinal analysis outputs, synthetic positive-control results, and manuscript Supplementary Data.
+
+The frozen software release and reproducibility dataset are archived separately to preserve a clear distinction between executable analysis code and study-specific data and outputs.
 
 ---
 
@@ -1503,21 +1506,29 @@ https://doi.org/10.64898/2026.09.24.754170v1
 
 ## Software
 
-ClonoDynamics software repository:  
+**ClonoDynamics: a noise-aware pipeline for longitudinal T-cell receptor repertoire dynamics.**
+
+Version: `v1.0.0-biorxiv`
+
+Source repository:  
 https://github.com/ClonoDynamics/clonodynamics-pipeline
 
-**Software DOI:**  
-[to be added]
+Archived software release:  
+https://doi.org/10.5281/zenodo.22925873
 
-**Reproducibility-data DOI:**  
-[to be added]
+## Reproducibility data
+
+**ClonoDynamics reproducibility dataset: processed TCR repertoires, pseudo-longitudinal technical reference, longitudinal analysis outputs, and synthetic validation.**
+
+Zenodo:  
+https://doi.org/10.5281/zenodo.22925114
 
 A machine-readable `CITATION.cff` file is provided with the repository.
 
 # Contact
 
-Prof. Camillo Palmieri, PhD
-Università Magna Græcia di Catanzaro, Italy
+**Camillo Palmieri, PhD**  
+Università Magna Græcia di Catanzaro, Italy  
 [cpalmieri@unicz.it](mailto:cpalmieri@unicz.it)
 
-For questions about the software, reproducibility, or methodological implementation, please use the GitHub issue tracker or contact the corresponding author.
+For questions about ClonoDynamics, reproducibility, or methodological implementation, please use the GitHub issue tracker or contact the corresponding author.
